@@ -1,0 +1,77 @@
+group 'ru.cyberspacelabs'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'war'
+apply from: 'https://raw.github.com/akhikhl/gretty/master/pluginScripts/gretty.plugin'
+apply plugin: 'docker'
+
+def distPackageName = project.name + '-' + project.version + '-bundled.tgz'
+def productDirectory = 'build/output/' + project.name;
+def containerWorkDir = '/opt/' + project.name
+def dockerHubAccount = 'cyberspacelabs'
+def appPort = 8080;
+
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+        maven {
+            url  "http://dl.bintray.com/transmode/gradle-plugins"
+        }
+    }
+
+    dependencies {
+        classpath 'se.transmode.gradle:gradle-docker:1.2'
+    }
+}
+
+gretty {
+    contextPath = "openarena-directory"
+    httpPort = appPort
+    servletContainer = 'jetty9'
+}
+
+docker {
+    baseImage 'williamyeh/java8'
+    maintainer 'Mikhail Zakharov "cyberspacelabs@gmail.com"'
+}
+
+
+task dockerImage(type: Docker) {
+    dependsOn 'buildProduct'
+    tag = dockerHubAccount + '/' + project.name
+    exposePort appPort
+    runCommand 'mkdir ' + containerWorkDir
+    addFile productDirectory, containerWorkDir
+    entryPoint = [containerWorkDir + '/start.sh']
+}
+
+task packageApp(type:Tar){
+    dependsOn 'buildProduct'
+    from (productDirectory)
+    destinationDir projectDir
+    archiveName distPackageName
+    compression = Compression.GZIP
+}
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    compile 'ch.qos.logback:logback-classic:1.1.3'
+    compile 'org.springframework:spring-webmvc:4.1.6.RELEASE'
+    compile 'javax.servlet:jstl:1.2'
+    compile 'javax.servlet:javax.servlet-api:3.0.1'
+    compile 'com.google.guava:guava:20.0'
+    compile 'com.fasterxml.jackson.core:jackson-core:2.8.5'
+    compile 'com.fasterxml.jackson.core:jackson-annotations:2.8.5'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.8.5'
+    compile 'com.squareup.okhttp3:okhttp:3.5.0'
+    testCompile 'org.mockito:mockito-core:2.+'
+    testCompile 'org.springframework:spring-test:4.1.6.RELEASE'
+    testCompile 'junit:junit:4.11'
+    testCompile 'org.hamcrest:hamcrest-library:1.3'
+}

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<qstat>
+	<server type="OAM" address="cyberspacelabs.ru" status="TIMEOUT">
+		<hostname>cyberspacelabs.ru</hostname>
+	</server>
+</qstat>

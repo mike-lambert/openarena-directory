@@ -1,0 +1,16 @@
+{
+  "wine" : true,
+  "qstat" : "/opt/openarena/qstat/qstat.exe",
+  "services": [
+    {
+      "server" : "dpmaster.deathmask.net",
+      "report" : "dpmaster.deathmask.net.xml",
+      "expires": 60000
+    },
+    {
+      "server" : "cyberspacelabs.ru",
+      "report" : "cyberspacelabs.ru.xml",
+      "expires": 15000
+    }
+  ]
+}
