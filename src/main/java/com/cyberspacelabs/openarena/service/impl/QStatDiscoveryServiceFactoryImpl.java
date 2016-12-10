@@ -37,7 +37,7 @@ public class QStatDiscoveryServiceFactoryImpl implements QStatDiscoveryServiceFa
         public String report;
         public long expires;
     }
-    @Value("${qstat.factory.config}")
+    @Value("${qstat.factory.config:'classpath:discovery.json'}")
     private String discoveryServicesConfigurationLocation;
     private Set<QStatDiscoveryService> instances;
     private Object lock;

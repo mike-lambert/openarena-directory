@@ -1,0 +1,56 @@
+  .led-red {
+    margin: 10px auto;
+    width: 12px;
+    height: 12px;
+    background-color: #FF0000;
+    border-radius: 50%;
+    box-shadow: #000 0 -1px 7px 1px, inset #600 0 -1px 9px, #F00 0 2px 12px;
+  }
+
+  .led-yellow {
+    margin: 10px auto;
+    width: 12px;
+    height: 12px;
+    background-color: #FFFF00;
+    border-radius: 50%;
+    box-shadow: #000 0 -1px 7px 1px, inset #660 0 -1px 9px, #DD0 0 2px 12px;
+  }
+
+  .led-green {
+    margin: 10px auto;
+    width: 12px;
+    height: 12px;
+    background-color: #00FF00;
+    border-radius: 50%;
+    box-shadow: #000 0 -1px 7px 1px, inset #460 0 -1px 9px, #7D0 0 2px 12px;
+  }
+
+  .led-off {
+    margin: 10px auto;
+    width: 12px;
+    height: 12px;
+    background-color: #444444;
+    border-radius: 50%;
+    box-shadow: #000 0 -1px 7px 1px, inset #333 0 -1px 9px, #333 0 2px 14px;
+  }
+
+  .text-green {
+    color: #44FF44;
+  }
+
+  .text-off {
+    color: #444444;
+  }
+
+  .text-yellow {
+    color: #FFFF44;
+  }
+
+  .text-red {
+    color: #FF4444;
+  }
+
+  .text-value {
+    visibility: hidden;
+    display: table-column;
+  }

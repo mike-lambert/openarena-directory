@@ -2,10 +2,14 @@ package integration;
 
 import com.cyberspacelabs.openarena.model.OpenArenaDiscoveryRecord;
 import com.cyberspacelabs.openarena.model.OpenArenaServerRecord;
+import com.cyberspacelabs.openarena.model.geoip.Path;
+import com.cyberspacelabs.openarena.service.GeoIpMappingService;
+import com.cyberspacelabs.openarena.service.GeoIpResolutionService;
 import com.cyberspacelabs.openarena.service.OpenArenaDirectoryService;
 import com.cyberspacelabs.openarena.web.controller.rest.DirectoryController;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -15,7 +19,9 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 
+import static org.hamcrest.Matchers.any;
 import static org.hamcrest.Matchers.containsString;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -27,6 +33,12 @@ public class Directory {
 
     @Mock
     private OpenArenaDirectoryService directoryService;
+
+    @Mock
+    private GeoIpMappingService mappingService;
+
+    @Mock
+    private GeoIpResolutionService resolutionService;
 
     private MockMvc mvc;
 
@@ -60,7 +72,7 @@ public class Directory {
         record1.setSlotsAvailable(8);
         record1.setStatus(OpenArenaServerRecord.ServerStatus.UP);
 
-        OpenArenaServerRecord record2 = new OpenArenaServerRecord("cyberspacelabs.ru:27961");
+        OpenArenaServerRecord record2 = new OpenArenaServerRecord("212.20.130.251:27960");
         record2.setDisplayName("Q3@Cyberspace Labs");
         record2.setGameType("DM");
         record2.setMap("q3dm1");

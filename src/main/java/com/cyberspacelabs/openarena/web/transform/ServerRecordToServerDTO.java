@@ -11,11 +11,12 @@ public class ServerRecordToServerDTO implements Function<OpenArenaServerRecord, 
         ServerDTO result = new ServerDTO();
         result.setAddress(input.getAddress());
         result.setLoad(input.getPlayersPresent() + "/" + input.getSlotsAvailable());
-        result.setLocation(new LocationDTO()); // TODO: implement
+        result.setLocation(new LocationDTO());
         result.setMap(input.getMap());
         result.setMode(input.getGameType().isEmpty() ? "baseoa" : input.getGameType());
         result.setPing(input.getPing());
         result.setType(input.getGameType().equalsIgnoreCase("Quake3Arena") ? "QUAKE3" : "OPENARENA");
+        result.setName(input.getDisplayName());
         return result;
     }
 }

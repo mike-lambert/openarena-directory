@@ -1,6 +1,76 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <qstat>
-	<server type="OAM" address="dpmaster.deathmask.net" status="UP" servers="102">
+	<server type="OAM" address="dpmaster.deathmask.net" status="UP" servers="103">
+	</server>
+	<server type="OPENARENA" address="37.153.1.43:27960" status="UP">
+		<hostname>37.153.1.43:27960</hostname>
+		<name>[WEBA ISP] DM</name>
+		<gametype></gametype>
+		<map>oa_shouse</map>
+		<numplayers>3</numplayers>
+		<maxplayers>32</maxplayers>
+		<ping>60</ping>
+		<retries>0</retries>
+	</server>
+	<server type="OPENARENA" address="62.75.220.12:29555" status="UP">
+		<hostname>62.75.220.12:29555</hostname>
+		<name>H4L.True Combat</name>
+		<gametype>Quake3Arena</gametype>
+		<map>oxodm4</map>
+		<numplayers>0</numplayers>
+		<maxplayers>12</maxplayers>
+		<ping>119</ping>
+		<retries>0</retries>
+	</server>
+	<server type="OPENARENA" address="176.31.254.6:27960" status="UP">
+		<hostname>176.31.254.6:27960</hostname>
+		<name>   ROFL KIWI Insta DM !</name>
+		<gametype></gametype>
+		<map>oa_dm1</map>
+		<numplayers>6</numplayers>
+		<maxplayers>16</maxplayers>
+		<ping>120</ping>
+		<retries>0</retries>
+	</server>
+	<server type="OPENARENA" address="178.62.60.27:27965" status="UP">
+		<hostname>178.62.60.27:27965</hostname>
+		<name>Cookie Duel EU</name>
+		<gametype>cookieduel</gametype>
+		<map>aggressor</map>
+		<numplayers>0</numplayers>
+		<maxplayers>8</maxplayers>
+		<ping>110</ping>
+		<retries>0</retries>
+	</server>
+	<server type="OPENARENA" address="144.76.100.87:27993" status="UP">
+		<hostname>144.76.100.87:27993</hostname>
+		<name> -CITY-MAPS-OPENMAFIA-</name>
+		<gametype>city</gametype>
+		<map>gas-st</map>
+		<numplayers>3</numplayers>
+		<maxplayers>20</maxplayers>
+		<ping>113</ping>
+		<retries>0</retries>
+	</server>
+	<server type="OPENARENA" address="91.134.133.219:28000" status="UP">
+		<hostname>91.134.133.219:28000</hostname>
+		<name>ffaclassic /saf/</name>
+		<gametype></gametype>
+		<map>q3dm6ish</map>
+		<numplayers>0</numplayers>
+		<maxplayers>36</maxplayers>
+		<ping>111</ping>
+		<retries>0</retries>
+	</server>
+	<server type="OPENARENA" address="131.155.141.68:27961" status="UP">
+		<hostname>131.155.141.68:27961</hostname>
+		<name>  [Z] Normal CTF server</name>
+		<gametype>baseoa</gametype>
+		<map>hydronex</map>
+		<numplayers>2</numplayers>
+		<maxplayers>12</maxplayers>
+		<ping>133</ping>
+		<retries>0</retries>
 	</server>
 	<server type="OPENARENA" address="144.76.100.87:27777" status="UP">
 		<hostname>144.76.100.87:27777</hostname>
@@ -9,7 +79,7 @@
 		<map>13vast</map>
 		<numplayers>0</numplayers>
 		<maxplayers>14</maxplayers>
-		<ping>111</ping>
+		<ping>110</ping>
 		<retries>0</retries>
 	</server>
 	<server type="OPENARENA" address="178.16.26.158:27960" status="UP">
@@ -19,7 +89,17 @@
 		<map>oa_ctf2</map>
 		<numplayers>0</numplayers>
 		<maxplayers>12</maxplayers>
-		<ping>101</ping>
+		<ping>80</ping>
+		<retries>0</retries>
+	</server>
+	<server type="OPENARENA" address="188.26.195.20:27992" status="UP">
+		<hostname>188.26.195.20:27992</hostname>
+		<name>DSotM#3 - Oasago2 CTF 818</name>
+		<gametype>Quake3Arena</gametype>
+		<map>oasago2</map>
+		<numplayers>2</numplayers>
+		<maxplayers>16</maxplayers>
+		<ping>149</ping>
 		<retries>0</retries>
 	</server>
 	<server type="OPENARENA" address="144.76.100.87:27960" status="UP">
@@ -32,14 +112,14 @@
 		<ping>110</ping>
 		<retries>0</retries>
 	</server>
-	<server type="OPENARENA" address="83.27.147.233:27962" status="UP">
-		<hostname>83.27.147.233:27962</hostname>
-		<name>[PRO] rp.servequake.com stats&amp;forum</name>
+	<server type="OPENARENA" address="78.193.116.82:27961" status="UP">
+		<hostname>78.193.116.82:27961</hostname>
+		<name>JACK'S EXCESSIVE INSTA</name>
 		<gametype>Quake3Arena</gametype>
-		<map>aggressor</map>
-		<numplayers>6</numplayers>
+		<map>phantq3dm4</map>
+		<numplayers>4</numplayers>
 		<maxplayers>12</maxplayers>
-		<ping>154</ping>
+		<ping>166</ping>
 		<retries>0</retries>
 	</server>
 	<server type="OPENARENA" address="95.46.114.22:27960" status="UP">
@@ -49,17 +129,17 @@
 		<map>q3zacharias</map>
 		<numplayers>0</numplayers>
 		<maxplayers>16</maxplayers>
-		<ping>54</ping>
+		<ping>56</ping>
 		<retries>0</retries>
 	</server>
 	<server type="OPENARENA" address="185.53.128.47:27962" status="UP">
 		<hostname>185.53.128.47:27962</hostname>
 		<name>GeM's InstantGib CTF!</name>
 		<gametype>CTF</gametype>
-		<map>x3map04</map>
+		<map>oldsago2</map>
 		<numplayers>2</numplayers>
-		<maxplayers>14</maxplayers>
-		<ping>105</ping>
+		<maxplayers>12</maxplayers>
+		<ping>110</ping>
 		<retries>0</retries>
 	</server>
 	<server type="OPENARENA" address="144.76.100.87:27962" status="UP">
@@ -79,47 +159,27 @@
 		<map>13vast</map>
 		<numplayers>0</numplayers>
 		<maxplayers>15</maxplayers>
-		<ping>114</ping>
-		<retries>0</retries>
-	</server>
-	<server type="OPENARENA" address="185.83.217.45:27960" status="UP">
-		<hostname>185.83.217.45:27960</hostname>
-		<name>ZimsTINY Instantgib</name>
-		<gametype>CTF</gametype>
-		<map>17+ctf</map>
-		<numplayers>1</numplayers>
-		<maxplayers>14</maxplayers>
-		<ping>108</ping>
-		<retries>0</retries>
-	</server>
-	<server type="OPENARENA" address="37.153.1.43:27963" status="UP">
-		<hostname>37.153.1.43:27963</hostname>
-		<name>[WEBA ISP] Domination</name>
-		<gametype></gametype>
-		<map>oa_dm5</map>
-		<numplayers>6</numplayers>
-		<maxplayers>32</maxplayers>
-		<ping>61</ping>
-		<retries>0</retries>
-	</server>
-	<server type="OPENARENA" address="37.120.167.173:27962" status="UP">
-		<hostname>37.120.167.173:27962</hostname>
-		<name>Einherjer Europe [linuxiuvat.de]</name>
-		<gametype>Quake3Arena</gametype>
-		<map>oa_dm7</map>
-		<numplayers>5</numplayers>
-		<maxplayers>16</maxplayers>
-		<ping>97</ping>
+		<ping>111</ping>
 		<retries>0</retries>
 	</server>
 	<server type="OPENARENA" address="73.37.183.90:27960" status="UP">
 		<hostname>73.37.183.90:27960</hostname>
 		<name>Minnesota OpenArena FFA DM w/Bots - WWW.SaraJayVideos.Com</name>
 		<gametype></gametype>
-		<map>oa_dm2</map>
+		<map>am_underworks2</map>
 		<numplayers>12</numplayers>
 		<maxplayers>16</maxplayers>
-		<ping>234</ping>
+		<ping>222</ping>
+		<retries>0</retries>
+	</server>
+	<server type="OPENARENA" address="185.83.217.45:27960" status="UP">
+		<hostname>185.83.217.45:27960</hostname>
+		<name>ZimsTINY Instantgib</name>
+		<gametype>CTF</gametype>
+		<map>reptctf11</map>
+		<numplayers>1</numplayers>
+		<maxplayers>14</maxplayers>
+		<ping>115</ping>
 		<retries>0</retries>
 	</server>
 	<server type="OPENARENA" address="73.37.183.90:27961" status="UP">
@@ -129,27 +189,67 @@
 		<map>mlca1</map>
 		<numplayers>0</numplayers>
 		<maxplayers>16</maxplayers>
-		<ping>232</ping>
+		<ping>225</ping>
+		<retries>0</retries>
+	</server>
+	<server type="OPENARENA" address="37.153.1.43:27963" status="UP">
+		<hostname>37.153.1.43:27963</hostname>
+		<name>[WEBA ISP] Domination</name>
+		<gametype></gametype>
+		<map>oa_dm5</map>
+		<numplayers>6</numplayers>
+		<maxplayers>32</maxplayers>
+		<ping>62</ping>
+		<retries>0</retries>
+	</server>
+	<server type="OPENARENA" address="37.120.167.173:27962" status="UP">
+		<hostname>37.120.167.173:27962</hostname>
+		<name>Einherjer Europe [linuxiuvat.de]</name>
+		<gametype>Quake3Arena</gametype>
+		<map>oa_rpg3dm2</map>
+		<numplayers>5</numplayers>
+		<maxplayers>16</maxplayers>
+		<ping>118</ping>
 		<retries>0</retries>
 	</server>
 	<server type="OPENARENA" address="104.251.212.146:27961" status="UP">
 		<hostname>104.251.212.146:27961</hostname>
 		<name>The Cookie Jar</name>
 		<gametype>cookies</gametype>
-		<map>bubctf1</map>
+		<map>mkbase</map>
 		<numplayers>2</numplayers>
 		<maxplayers>20</maxplayers>
-		<ping>212</ping>
+		<ping>236</ping>
 		<retries>0</retries>
 	</server>
 	<server type="OPENARENA" address="188.26.195.20:27991" status="UP">
 		<hostname>188.26.195.20:27991</hostname>
 		<name>DSotM#2 - CTF/DM 818</name>
 		<gametype>Quake3Arena</gametype>
-		<map>oasago2</map>
+		<map>oacmpctf2</map>
 		<numplayers>2</numplayers>
 		<maxplayers>16</maxplayers>
-		<ping>136</ping>
+		<ping>145</ping>
+		<retries>0</retries>
+	</server>
+	<server type="OPENARENA" address="176.31.254.6:27964" status="UP">
+		<hostname>176.31.254.6:27964</hostname>
+		<name>   ROFL instantgib !</name>
+		<gametype>CTF</gametype>
+		<map>pul1ctf</map>
+		<numplayers>4</numplayers>
+		<maxplayers>18</maxplayers>
+		<ping>104</ping>
+		<retries>0</retries>
+	</server>
+	<server type="OPENARENA" address="74.208.164.109:27961" status="UP">
+		<hostname>74.208.164.109:27961</hostname>
+		<name>hightime vanilla ffa</name>
+		<gametype>Quake3Arena</gametype>
+		<map>am_galmevish</map>
+		<numplayers>4</numplayers>
+		<maxplayers>20</maxplayers>
+		<ping>258</ping>
 		<retries>0</retries>
 	</server>
 	<server type="OPENARENA" address="62.75.220.12:28667" status="UP">
@@ -159,57 +259,37 @@
 		<map>suspended</map>
 		<numplayers>2</numplayers>
 		<maxplayers>16</maxplayers>
-		<ping>114</ping>
+		<ping>122</ping>
 		<retries>0</retries>
 	</server>
 	<server type="OPENARENA" address="80.109.118.123:27960" status="UP">
 		<hostname>80.109.118.123:27960</hostname>
 		<name>STETER Openarena Server</name>
 		<gametype></gametype>
-		<map>kaos2</map>
+		<map>oa_shouse</map>
 		<numplayers>4</numplayers>
 		<maxplayers>16</maxplayers>
-		<ping>136</ping>
-		<retries>0</retries>
-	</server>
-	<server type="OPENARENA" address="74.208.164.109:27961" status="UP">
-		<hostname>74.208.164.109:27961</hostname>
-		<name>hightime vanilla ffa</name>
-		<gametype>Quake3Arena</gametype>
-		<map>oa_dm2</map>
-		<numplayers>4</numplayers>
-		<maxplayers>20</maxplayers>
-		<ping>255</ping>
+		<ping>144</ping>
 		<retries>0</retries>
 	</server>
 	<server type="OPENARENA" address="62.75.152.253:20003" status="UP">
 		<hostname>62.75.152.253:20003</hostname>
 		<name>  :F ctf for GENIUSES</name>
 		<gametype>CTF</gametype>
-		<map>ctf_inyard</map>
-		<numplayers>4</numplayers>
+		<map>oasago2</map>
+		<numplayers>12</numplayers>
 		<maxplayers>24</maxplayers>
-		<ping>91</ping>
+		<ping>118</ping>
 		<retries>0</retries>
 	</server>
 	<server type="OPENARENA" address="131.155.141.68:27960" status="UP">
 		<hostname>131.155.141.68:27960</hostname>
 		<name>  [Z] fastweap small maps server</name>
 		<gametype>baseoa</gametype>
-		<map>oa_minia</map>
+		<map>oa_dm7</map>
 		<numplayers>3</numplayers>
 		<maxplayers>16</maxplayers>
-		<ping>116</ping>
-		<retries>0</retries>
-	</server>
-	<server type="OPENARENA" address="91.102.11.11:27960" status="UP">
-		<hostname>91.102.11.11:27960</hostname>
-		<name>Battle against incontinence</name>
-		<gametype></gametype>
-		<map>oa_pvomit</map>
-		<numplayers>0</numplayers>
-		<maxplayers>16</maxplayers>
-		<ping>116</ping>
+		<ping>140</ping>
 		<retries>0</retries>
 	</server>
 	<server type="OPENARENA" address="176.31.254.6:27962" status="UP">
@@ -219,17 +299,7 @@
 		<map>cbctf1</map>
 		<numplayers>4</numplayers>
 		<maxplayers>16</maxplayers>
-		<ping>114</ping>
-		<retries>0</retries>
-	</server>
-	<server type="OPENARENA" address="131.155.141.68:27975" status="UP">
-		<hostname>131.155.141.68:27975</hostname>
-		<name>  [Z]^8 BRIGHT^6SKins DM server</name>
-		<gametype>aftershock</gametype>
-		<map>aggressor</map>
-		<numplayers>0</numplayers>
-		<maxplayers>16</maxplayers>
-		<ping>113</ping>
+		<ping>104</ping>
 		<retries>0</retries>
 	</server>
 	<server type="OPENARENA" address="37.153.1.43:27964" status="UP">
@@ -239,37 +309,27 @@
 		<map>oa_dm4</map>
 		<numplayers>6</numplayers>
 		<maxplayers>32</maxplayers>
-		<ping>64</ping>
+		<ping>59</ping>
 		<retries>0</retries>
 	</server>
-	<server type="OPENARENA" address="87.230.95.165:27960" status="UP">
-		<hostname>87.230.95.165:27960</hostname>
-		<name>Kekse23.de. OA server</name>
-		<gametype>Quake3Arena</gametype>
-		<map>oa_dm5</map>
-		<numplayers>15</numplayers>
+	<server type="OPENARENA" address="91.102.11.11:27960" status="UP">
+		<hostname>91.102.11.11:27960</hostname>
+		<name>Battle against incontinence</name>
+		<gametype></gametype>
+		<map>oa_pvomit</map>
+		<numplayers>0</numplayers>
 		<maxplayers>16</maxplayers>
-		<ping>112</ping>
+		<ping>130</ping>
 		<retries>0</retries>
 	</server>
 	<server type="OPENARENA" address="50.116.34.88:27961" status="UP">
 		<hostname>50.116.34.88:27961</hostname>
 		<name>    CUSTOM-ciggaweed-No bitchassness</name>
 		<gametype></gametype>
-		<map>XPac_BT</map>
+		<map>bal3void2</map>
 		<numplayers>4</numplayers>
 		<maxplayers>20</maxplayers>
-		<ping>209</ping>
-		<retries>0</retries>
-	</server>
-	<server type="OPENARENA" address="91.134.133.219:27960" status="UP">
-		<hostname>91.134.133.219:27960</hostname>
-		<name>redrabbit /saf/</name>
-		<gametype>baseoa</gametype>
-		<map>q3dm6</map>
-		<numplayers>0</numplayers>
-		<maxplayers>6</maxplayers>
-		<ping>108</ping>
+		<ping>207</ping>
 		<retries>0</retries>
 	</server>
 	<server type="OPENARENA" address="104.251.212.146:27930" status="UP">
@@ -279,7 +339,27 @@
 		<map>cpm24</map>
 		<numplayers>0</numplayers>
 		<maxplayers>8</maxplayers>
-		<ping>212</ping>
+		<ping>210</ping>
+		<retries>0</retries>
+	</server>
+	<server type="OPENARENA" address="91.134.133.219:27960" status="UP">
+		<hostname>91.134.133.219:27960</hostname>
+		<name>redrabbit /saf/</name>
+		<gametype>baseoa</gametype>
+		<map>q3dm6</map>
+		<numplayers>0</numplayers>
+		<maxplayers>6</maxplayers>
+		<ping>115</ping>
+		<retries>0</retries>
+	</server>
+	<server type="OPENARENA" address="131.155.141.68:27975" status="UP">
+		<hostname>131.155.141.68:27975</hostname>
+		<name>  [Z]^8 BRIGHT^6SKins DM server</name>
+		<gametype>aftershock</gametype>
+		<map>aggressor</map>
+		<numplayers>0</numplayers>
+		<maxplayers>16</maxplayers>
+		<ping>129</ping>
 		<retries>0</retries>
 	</server>
 	<server type="OPENARENA" address="104.251.212.146:27965" status="UP">
@@ -292,14 +372,34 @@
 		<ping>213</ping>
 		<retries>0</retries>
 	</server>
+	<server type="OPENARENA" address="87.230.95.165:27960" status="UP">
+		<hostname>87.230.95.165:27960</hostname>
+		<name>Kekse23.de. OA server</name>
+		<gametype>Quake3Arena</gametype>
+		<map>oa_dm4</map>
+		<numplayers>15</numplayers>
+		<maxplayers>16</maxplayers>
+		<ping>136</ping>
+		<retries>0</retries>
+	</server>
 	<server type="OPENARENA" address="185.101.93.191:27960" status="UP">
 		<hostname>185.101.93.191:27960</hostname>
 		<name>Lauri's SnowGarden (CTF) </name>
 		<gametype>Quake3Arena</gametype>
-		<map>oa_ctf2</map>
+		<map>ps6ctf</map>
 		<numplayers>0</numplayers>
 		<maxplayers>16</maxplayers>
-		<ping>92</ping>
+		<ping>113</ping>
+		<retries>0</retries>
+	</server>
+	<server type="OPENARENA" address="177.92.47.66:27960" status="UP">
+		<hostname>177.92.47.66:27960</hostname>
+		<name>OABR</name>
+		<gametype>Quake3Arena</gametype>
+		<map>slimefac</map>
+		<numplayers>5</numplayers>
+		<maxplayers>10</maxplayers>
+		<ping>371</ping>
 		<retries>0</retries>
 	</server>
 	<server type="OPENARENA" address="90.94.226.7:27960" status="UP">
@@ -309,34 +409,24 @@
 		<map>GOD_PS37CTF</map>
 		<numplayers>2</numplayers>
 		<maxplayers>24</maxplayers>
-		<ping>129</ping>
-		<retries>0</retries>
-	</server>
-	<server type="OPENARENA" address="177.92.47.66:27960" status="UP">
-		<hostname>177.92.47.66:27960</hostname>
-		<name>OABR</name>
-		<gametype>Quake3Arena</gametype>
-		<map>oa_spirit3</map>
-		<numplayers>5</numplayers>
-		<maxplayers>10</maxplayers>
-		<ping>360</ping>
+		<ping>150</ping>
 		<retries>0</retries>
 	</server>
 	<server type="OPENARENA" address="62.75.220.12:28666" status="UP">
 		<hostname>62.75.220.12:28666</hostname>
 		<name>H4L.Funstagib</name>
 		<gametype>Quake3Arena</gametype>
-		<map>sincity</map>
+		<map>casablanca</map>
 		<numplayers>2</numplayers>
 		<maxplayers>16</maxplayers>
-		<ping>112</ping>
+		<ping>121</ping>
 		<retries>0</retries>
 	</server>
 	<server type="OPENARENA" address="37.153.1.43:27962" status="UP">
 		<hostname>37.153.1.43:27962</hostname>
 		<name>[WEBA ISP] CTF</name>
 		<gametype></gametype>
-		<map>am_thornish</map>
+		<map>mlctf1beta</map>
 		<numplayers>6</numplayers>
 		<maxplayers>32</maxplayers>
 		<ping>62</ping>
@@ -346,7 +436,7 @@
 		<hostname>144.76.100.87:28001</hostname>
 		<name> -PLaNeT*DeFRaG@opEnmAfia</name>
 		<gametype>defrag</gametype>
-		<map>line</map>
+		<map>lab-annh</map>
 		<numplayers>0</numplayers>
 		<maxplayers>12</maxplayers>
 		<ping>110</ping>
@@ -356,80 +446,100 @@
 		<hostname>212.83.180.186:27970</hostname>
 		<name>OA_Weapon/Vampire/Grapple(Nsk)</name>
 		<gametype>Quake3Arena</gametype>
-		<map>ctf_compromise</map>
+		<map>ps9ctf</map>
 		<numplayers>2</numplayers>
 		<maxplayers>10</maxplayers>
-		<ping>116</ping>
-		<retries>0</retries>
-	</server>
-	<server type="OPENARENA" address="193.169.220.14:27960" status="UP">
-		<hostname>193.169.220.14:27960</hostname>
-		<name>&lt;  A14  &gt;</name>
-		<gametype></gametype>
-		<map>ce1m7</map>
-		<numplayers>0</numplayers>
-		<maxplayers>10</maxplayers>
-		<ping>55</ping>
+		<ping>114</ping>
 		<retries>0</retries>
 	</server>
 	<server type="OPENARENA" address="185.83.217.253:27960" status="UP">
 		<hostname>185.83.217.253:27960</hostname>
 		<name>GeM's Freeze CTF!</name>
 		<gametype>ufreeze</gametype>
-		<map>13dream</map>
+		<map>13vast</map>
 		<numplayers>4</numplayers>
 		<maxplayers>16</maxplayers>
-		<ping>108</ping>
+		<ping>110</ping>
+		<retries>0</retries>
+	</server>
+	<server type="OPENARENA" address="82.146.35.230:27960" status="UP">
+		<hostname>82.146.35.230:27960</hostname>
+		<name>Cyberspace Labs FFA</name>
+		<gametype></gametype>
+		<map>oasago1</map>
+		<numplayers>0</numplayers>
+		<maxplayers>8</maxplayers>
+		<ping>51</ping>
+		<retries>0</retries>
+	</server>
+	<server type="OPENARENA" address="193.169.220.14:27960" status="UP">
+		<hostname>193.169.220.14:27960</hostname>
+		<name>&lt;  A14  &gt;</name>
+		<gametype></gametype>
+		<map>pro-ct3tourney2</map>
+		<numplayers>0</numplayers>
+		<maxplayers>10</maxplayers>
+		<ping>54</ping>
 		<retries>0</retries>
 	</server>
 	<server type="OPENARENA" address="109.74.195.154:27960" status="UP">
 		<hostname>109.74.195.154:27960</hostname>
 		<name>London 1</name>
 		<gametype>Quake3Arena</gametype>
-		<map>oa_dm6</map>
+		<map>am_spacecont</map>
 		<numplayers>3</numplayers>
 		<maxplayers>16</maxplayers>
-		<ping>115</ping>
-		<retries>0</retries>
-	</server>
-	<server type="OPENARENA" address="104.131.62.136:27960" status="UP">
-		<hostname>104.131.62.136:27960</hostname>
-		<name>   ciggaweed - no bitchassness</name>
-		<gametype></gametype>
-		<map>wrackdm17</map>
-		<numplayers>12</numplayers>
-		<maxplayers>20</maxplayers>
-		<ping>184</ping>
+		<ping>122</ping>
 		<retries>0</retries>
 	</server>
 	<server type="OPENARENA" address="144.76.100.87:27999" status="UP">
 		<hostname>144.76.100.87:27999</hostname>
 		<name> Evil|Insta+RJ@openmafia</name>
 		<gametype>evil-ctf</gametype>
-		<map>071oasago2</map>
+		<map>simpsons_q3</map>
 		<numplayers>2</numplayers>
 		<maxplayers>20</maxplayers>
-		<ping>110</ping>
+		<ping>111</ping>
+		<retries>0</retries>
+	</server>
+	<server type="OPENARENA" address="104.131.62.136:27960" status="UP">
+		<hostname>104.131.62.136:27960</hostname>
+		<name>   ciggaweed - no bitchassness</name>
+		<gametype></gametype>
+		<map>oa_minia</map>
+		<numplayers>2</numplayers>
+		<maxplayers>20</maxplayers>
+		<ping>209</ping>
+		<retries>0</retries>
+	</server>
+	<server type="OPENARENA" address="144.76.100.87:28000" status="UP">
+		<hostname>144.76.100.87:28000</hostname>
+		<name> -StaR*DeFRaG@openmafia-</name>
+		<gametype>defrag</gametype>
+		<map>kabcorp-breaka</map>
+		<numplayers>0</numplayers>
+		<maxplayers>10</maxplayers>
+		<ping>113</ping>
 		<retries>0</retries>
 	</server>
 	<server type="OPENARENA" address="85.10.201.6:29600" status="UP">
 		<hostname>85.10.201.6:29600</hostname>
 		<name>Virtual Cattleground FFA</name>
 		<gametype></gametype>
-		<map>alkdm13</map>
+		<map>bal3dm5</map>
 		<numplayers>0</numplayers>
 		<maxplayers>10</maxplayers>
-		<ping>112</ping>
+		<ping>110</ping>
 		<retries>0</retries>
 	</server>
-	<server type="OPENARENA" address="47.32.145.165:27969" status="UP">
-		<hostname>47.32.145.165:27969</hostname>
-		<name>(NRA)NorCal Freedom Fighters Free For All</name>
-		<gametype></gametype>
-		<map>qbeast</map>
-		<numplayers>0</numplayers>
-		<maxplayers>22</maxplayers>
-		<ping>284</ping>
+	<server type="OPENARENA" address="83.27.67.54:27962" status="UP">
+		<hostname>83.27.67.54:27962</hostname>
+		<name>[PRO] rp.servequake.com stats&amp;forum</name>
+		<gametype>Quake3Arena</gametype>
+		<map>aggressor</map>
+		<numplayers>6</numplayers>
+		<maxplayers>12</maxplayers>
+		<ping>174</ping>
 		<retries>0</retries>
 	</server>
 	<server type="OPENARENA" address="137.74.199.130:27971" status="UP">
@@ -439,17 +549,27 @@
 		<map>oa_minia</map>
 		<numplayers>1</numplayers>
 		<maxplayers>18</maxplayers>
-		<ping>108</ping>
+		<ping>115</ping>
+		<retries>0</retries>
+	</server>
+	<server type="OPENARENA" address="176.31.254.6:27961" status="UP">
+		<hostname>176.31.254.6:27961</hostname>
+		<name>   ROFL allrockets !</name>
+		<gametype></gametype>
+		<map>ps37ctf</map>
+		<numplayers>4</numplayers>
+		<maxplayers>16</maxplayers>
+		<ping>102</ping>
 		<retries>0</retries>
 	</server>
 	<server type="OPENARENA" address="62.75.152.253:27963" status="UP">
 		<hostname>62.75.152.253:27963</hostname>
 		<name>  :F Insta</name>
 		<gametype>CTF</gametype>
-		<map>speedyctf</map>
-		<numplayers>2</numplayers>
+		<map>13vast</map>
+		<numplayers>12</numplayers>
 		<maxplayers>25</maxplayers>
-		<ping>93</ping>
+		<ping>99</ping>
 		<retries>0</retries>
 	</server>
 	<server type="OPENARENA" address="5.196.204.210:27960" status="UP">
@@ -459,37 +579,17 @@
 		<map>aggressor</map>
 		<numplayers>2</numplayers>
 		<maxplayers>13</maxplayers>
-		<ping>114</ping>
-		<retries>0</retries>
-	</server>
-	<server type="OPENARENA" address="73.172.95.138:27960" status="UP">
-		<hostname>73.172.95.138:27960</hostname>
-		<name>KingKam's RPi OpenArena</name>
-		<gametype>Quake3Arena</gametype>
-		<map>hmtfinal</map>
-		<numplayers>5</numplayers>
-		<maxplayers>16</maxplayers>
-		<ping>207</ping>
+		<ping>126</ping>
 		<retries>0</retries>
 	</server>
 	<server type="OPENARENA" address="188.26.195.20:27990" status="UP">
 		<hostname>188.26.195.20:27990</hostname>
 		<name>DSotM#1 - Instagib 818</name>
 		<gametype>Quake3Arena</gametype>
-		<map>13dream</map>
+		<map>god_ps37ctf</map>
 		<numplayers>2</numplayers>
 		<maxplayers>16</maxplayers>
-		<ping>133</ping>
-		<retries>0</retries>
-	</server>
-	<server type="OPENARENA" address="176.31.254.6:27961" status="UP">
-		<hostname>176.31.254.6:27961</hostname>
-		<name>   ROFL allrockets !</name>
-		<gametype></gametype>
-		<map>oasago2</map>
-		<numplayers>4</numplayers>
-		<maxplayers>16</maxplayers>
-		<ping>114</ping>
+		<ping>153</ping>
 		<retries>0</retries>
 	</server>
 	<server type="OPENARENA" address="91.121.158.215:27961" status="UP">
@@ -499,37 +599,57 @@
 		<map>oa_spirit3</map>
 		<numplayers>0</numplayers>
 		<maxplayers>8</maxplayers>
-		<ping>101</ping>
+		<ping>111</ping>
 		<retries>0</retries>
 	</server>
 	<server type="OPENARENA" address="62.75.220.12:29999" status="UP">
 		<hostname>62.75.220.12:29999</hostname>
 		<name>H4L.InstaCTF</name>
 		<gametype>Quake3Arena</gametype>
-		<map>q3wc2</map>
+		<map>q3wcp21</map>
 		<numplayers>2</numplayers>
 		<maxplayers>12</maxplayers>
-		<ping>106</ping>
-		<retries>0</retries>
-	</server>
-	<server type="OPENARENA" address="62.75.152.253:27965" status="UP">
-		<hostname>62.75.152.253:27965</hostname>
-		<name>  Unmanaged Serveur</name>
-		<gametype>CTF</gametype>
-		<map>ctf_inyard</map>
-		<numplayers>6</numplayers>
-		<maxplayers>14</maxplayers>
-		<ping>96</ping>
+		<ping>107</ping>
 		<retries>0</retries>
 	</server>
 	<server type="OPENARENA" address="62.210.38.188:27961" status="UP">
 		<hostname>62.210.38.188:27961</hostname>
 		<name>[FP]E+: Instagib</name>
 		<gametype>excessiveplus</gametype>
-		<map>oacmpdm10</map>
+		<map>wrackdm17</map>
 		<numplayers>4</numplayers>
 		<maxplayers>16</maxplayers>
-		<ping>116</ping>
+		<ping>117</ping>
+		<retries>0</retries>
+	</server>
+	<server type="OPENARENA" address="47.32.145.165:27970" status="UP">
+		<hostname>47.32.145.165:27970</hostname>
+		<name>(NRA)NorCal Freedom Fighters CTF</name>
+		<gametype></gametype>
+		<map>13vast</map>
+		<numplayers>8</numplayers>
+		<maxplayers>22</maxplayers>
+		<ping>280</ping>
+		<retries>0</retries>
+	</server>
+	<server type="OPENARENA" address="62.210.38.188:27962" status="UP">
+		<hostname>62.210.38.188:27962</hostname>
+		<name>[FP]E+: Rockets</name>
+		<gametype>excessiveplus</gametype>
+		<map>aggressor</map>
+		<numplayers>8</numplayers>
+		<maxplayers>16</maxplayers>
+		<ping>121</ping>
+		<retries>0</retries>
+	</server>
+	<server type="OPENARENA" address="62.75.152.253:27965" status="UP">
+		<hostname>62.75.152.253:27965</hostname>
+		<name>  Unmanaged Serveur</name>
+		<gametype>CTF</gametype>
+		<map>oa_bases7</map>
+		<numplayers>6</numplayers>
+		<maxplayers>14</maxplayers>
+		<ping>120</ping>
 		<retries>0</retries>
 	</server>
 	<server type="OPENARENA" address="62.75.152.253:27962" status="UP">
@@ -539,17 +659,7 @@
 		<map>oa_minia</map>
 		<numplayers>3</numplayers>
 		<maxplayers>18</maxplayers>
-		<ping>95</ping>
-		<retries>0</retries>
-	</server>
-	<server type="OPENARENA" address="62.210.38.188:27962" status="UP">
-		<hostname>62.210.38.188:27962</hostname>
-		<name>[FP]E+: Rockets</name>
-		<gametype>excessiveplus</gametype>
-		<map>sleekgrinder</map>
-		<numplayers>8</numplayers>
-		<maxplayers>16</maxplayers>
-		<ping>113</ping>
+		<ping>119</ping>
 		<retries>0</retries>
 	</server>
 	<server type="OPENARENA" address="62.75.220.12:29311" status="UP">
@@ -559,17 +669,17 @@
 		<map>hydronex2</map>
 		<numplayers>0</numplayers>
 		<maxplayers>12</maxplayers>
-		<ping>101</ping>
+		<ping>102</ping>
 		<retries>0</retries>
 	</server>
 	<server type="OPENARENA" address="109.74.195.154:27961" status="UP">
 		<hostname>109.74.195.154:27961</hostname>
 		<name>London OACMPv1v3 server</name>
 		<gametype>Quake3Arena</gametype>
-		<map>oacmpdm9</map>
+		<map>oacmpdm2</map>
 		<numplayers>3</numplayers>
 		<maxplayers>16</maxplayers>
-		<ping>111</ping>
+		<ping>116</ping>
 		<retries>0</retries>
 	</server>
 	<server type="OPENARENA" address="144.76.65.176:29764" status="UP">
@@ -579,27 +689,27 @@
 		<map>god_ps37ctf</map>
 		<numplayers>0</numplayers>
 		<maxplayers>16</maxplayers>
-		<ping>111</ping>
+		<ping>115</ping>
 		<retries>0</retries>
 	</server>
 	<server type="OPENARENA" address="5.35.240.108:27960" status="UP">
 		<hostname>5.35.240.108:27960</hostname>
 		<name>hirnschwund.net OpenArena</name>
 		<gametype></gametype>
-		<map>delta</map>
+		<map>crescent</map>
 		<numplayers>6</numplayers>
 		<maxplayers>16</maxplayers>
-		<ping>118</ping>
+		<ping>114</ping>
 		<retries>0</retries>
 	</server>
 	<server type="OPENARENA" address="176.31.254.6:27965" status="UP">
 		<hostname>176.31.254.6:27965</hostname>
 		<name>   ROFL banana rockets!</name>
 		<gametype></gametype>
-		<map>wrackdm17</map>
+		<map>dm6ish</map>
 		<numplayers>4</numplayers>
 		<maxplayers>16</maxplayers>
-		<ping>114</ping>
+		<ping>118</ping>
 		<retries>0</retries>
 	</server>
 	<server type="OPENARENA" address="144.76.65.176:29763" status="UP">
@@ -609,37 +719,7 @@
 		<map>oacmpctf2</map>
 		<numplayers>2</numplayers>
 		<maxplayers>18</maxplayers>
-		<ping>111</ping>
-		<retries>0</retries>
-	</server>
-	<server type="OPENARENA" address="37.153.1.43:27961" status="UP">
-		<hostname>37.153.1.43:27961</hostname>
-		<name>[WEBA ISP] T,TDM,Elim,LMS</name>
-		<gametype></gametype>
-		<map>oa_shouse</map>
-		<numplayers>6</numplayers>
-		<maxplayers>32</maxplayers>
-		<ping>63</ping>
-		<retries>0</retries>
-	</server>
-	<server type="OPENARENA" address="144.76.65.176:29761" status="UP">
-		<hostname>144.76.65.176:29761</hostname>
-		<name>GoD | Pummel Club</name>
-		<gametype>baseoa</gametype>
-		<map>am_galmevish2</map>
-		<numplayers>4</numplayers>
-		<maxplayers>20</maxplayers>
-		<ping>111</ping>
-		<retries>0</retries>
-	</server>
-	<server type="OPENARENA" address="62.75.152.253:27961" status="UP">
-		<hostname>62.75.152.253:27961</hostname>
-		<name> :F aimtool</name>
-		<gametype>CTF</gametype>
-		<map>pro-q3dm6</map>
-		<numplayers>0</numplayers>
-		<maxplayers>18</maxplayers>
-		<ping>96</ping>
+		<ping>104</ping>
 		<retries>0</retries>
 	</server>
 	<server type="OPENARENA" address="62.75.220.12:28700" status="UP">
@@ -649,7 +729,27 @@
 		<map>tt_strafes_beta1</map>
 		<numplayers>0</numplayers>
 		<maxplayers>2</maxplayers>
-		<ping>109</ping>
+		<ping>101</ping>
+		<retries>0</retries>
+	</server>
+	<server type="OPENARENA" address="144.76.65.176:29761" status="UP">
+		<hostname>144.76.65.176:29761</hostname>
+		<name>GoD | Pummel Club</name>
+		<gametype>baseoa</gametype>
+		<map>oacmpdm8</map>
+		<numplayers>4</numplayers>
+		<maxplayers>20</maxplayers>
+		<ping>110</ping>
+		<retries>0</retries>
+	</server>
+	<server type="OPENARENA" address="82.2.197.152:27962" status="UP">
+		<hostname>82.2.197.152:27962</hostname>
+		<name>NastyINSTA =OA~CTF=</name>
+		<gametype></gametype>
+		<map>ps37ctf</map>
+		<numplayers>4</numplayers>
+		<maxplayers>16</maxplayers>
+		<ping>292</ping>
 		<retries>0</retries>
 	</server>
 	<server type="OPENARENA" address="94.26.101.60:27960" status="UP">
@@ -659,17 +759,57 @@
 		<map>wrackdm17</map>
 		<numplayers>0</numplayers>
 		<maxplayers>16</maxplayers>
-		<ping>148</ping>
+		<ping>129</ping>
 		<retries>0</retries>
 	</server>
-	<server type="OPENARENA" address="62.75.152.253:27960" status="UP">
-		<hostname>62.75.152.253:27960</hostname>
-		<name>  :F normal ctf for stupids</name>
+	<server type="OPENARENA" address="37.153.1.43:27961" status="UP">
+		<hostname>37.153.1.43:27961</hostname>
+		<name>[WEBA ISP] T,TDM,Elim,LMS</name>
+		<gametype></gametype>
+		<map>sleekgrinder</map>
+		<numplayers>6</numplayers>
+		<maxplayers>32</maxplayers>
+		<ping>63</ping>
+		<retries>0</retries>
+	</server>
+	<server type="OPENARENA" address="79.24.51.248:27960" status="UP">
+		<hostname>79.24.51.248:27960</hostname>
+		<name>BlackHole OpenBattle SimoGalaxy</name>
+		<gametype>Quake3Arena</gametype>
+		<map>oa_dm1</map>
+		<numplayers>0</numplayers>
+		<maxplayers>16</maxplayers>
+		<ping>179</ping>
+		<retries>0</retries>
+	</server>
+	<server type="OPENARENA" address="62.75.152.253:27961" status="UP">
+		<hostname>62.75.152.253:27961</hostname>
+		<name> :F aimtool</name>
 		<gametype>CTF</gametype>
-		<map>oasago2</map>
-		<numplayers>4</numplayers>
-		<maxplayers>25</maxplayers>
-		<ping>96</ping>
+		<map>pro-q3dm6</map>
+		<numplayers>0</numplayers>
+		<maxplayers>18</maxplayers>
+		<ping>119</ping>
+		<retries>0</retries>
+	</server>
+	<server type="OPENARENA" address="78.193.116.82:27960" status="UP">
+		<hostname>78.193.116.82:27960</hostname>
+		<name>JACK'S CUSTOM MAPS DM</name>
+		<gametype>Quake3Arena</gametype>
+		<map>kazdm1</map>
+		<numplayers>5</numplayers>
+		<maxplayers>12</maxplayers>
+		<ping>168</ping>
+		<retries>0</retries>
+	</server>
+	<server type="OPENARENA" address="62.75.152.253:27964" status="UP">
+		<hostname>62.75.152.253:27964</hostname>
+		<name>:F ca (test)</name>
+		<gametype>aftershock</gametype>
+		<map>13base</map>
+		<numplayers>5</numplayers>
+		<maxplayers>18</maxplayers>
+		<ping>99</ping>
 		<retries>0</retries>
 	</server>
 	<server type="OPENARENA" address="84.128.243.210:27960" status="UP">
@@ -679,27 +819,7 @@
 		<map>mlca1</map>
 		<numplayers>8</numplayers>
 		<maxplayers>15</maxplayers>
-		<ping>125</ping>
-		<retries>0</retries>
-	</server>
-	<server type="OPENARENA" address="62.75.152.253:27964" status="UP">
-		<hostname>62.75.152.253:27964</hostname>
-		<name>:F ca (test)</name>
-		<gametype>aftershock</gametype>
-		<map>phantq3dm4</map>
-		<numplayers>0</numplayers>
-		<maxplayers>18</maxplayers>
-		<ping>95</ping>
-		<retries>0</retries>
-	</server>
-	<server type="OPENARENA" address="82.2.197.152:27962" status="UP">
-		<hostname>82.2.197.152:27962</hostname>
-		<name>NastyINSTA =OA~CTF=</name>
-		<gametype></gametype>
-		<map>oa_ctf4ish</map>
-		<numplayers>4</numplayers>
-		<maxplayers>16</maxplayers>
-		<ping>330</ping>
+		<ping>141</ping>
 		<retries>0</retries>
 	</server>
 	<server type="OPENARENA" address="144.76.100.87:27666" status="UP">
@@ -712,16 +832,6 @@
 		<ping>110</ping>
 		<retries>0</retries>
 	</server>
-	<server type="OPENARENA" address="176.31.254.6:27963" status="UP">
-		<hostname>176.31.254.6:27963</hostname>
-		<name>   ROFL ofci_Insta !</name>
-		<gametype></gametype>
-		<map>oa_thor</map>
-		<numplayers>6</numplayers>
-		<maxplayers>16</maxplayers>
-		<ping>104</ping>
-		<retries>0</retries>
-	</server>
 	<server type="OPENARENA" address="82.2.197.152:27960" status="UP">
 		<hostname>82.2.197.152:27960</hostname>
 		<name>NastyINSTA =OA~FFA=</name>
@@ -729,47 +839,37 @@
 		<map>oasago2</map>
 		<numplayers>3</numplayers>
 		<maxplayers>16</maxplayers>
-		<ping>288</ping>
+		<ping>323</ping>
+		<retries>0</retries>
+	</server>
+	<server type="OPENARENA" address="47.32.145.165:27969" status="UP">
+		<hostname>47.32.145.165:27969</hostname>
+		<name>(NRA)NorCal Freedom Fighters Free For All</name>
+		<gametype></gametype>
+		<map>oa_dm3</map>
+		<numplayers>0</numplayers>
+		<maxplayers>22</maxplayers>
+		<ping>279</ping>
 		<retries>0</retries>
 	</server>
 	<server type="OPENARENA" address="177.135.99.151:27960" status="UP">
 		<hostname>177.135.99.151:27960</hostname>
 		<name>OpServices OpenArena CTF Server</name>
 		<gametype></gametype>
-		<map>letgo_01</map>
+		<map>pul1ctf</map>
 		<numplayers>0</numplayers>
 		<maxplayers>20</maxplayers>
-		<ping>361</ping>
+		<ping>375</ping>
 		<retries>0</retries>
 	</server>
-	<server type="OPENARENA" address="144.76.65.176:29762" status="UP">
-		<hostname>144.76.65.176:29762</hostname>
-		<name>GoD | Insta ReverseCTF</name>
-		<gametype>CTF</gametype>
-		<map>oacmpctf2</map>
-		<numplayers>2</numplayers>
-		<maxplayers>18</maxplayers>
-		<ping>110</ping>
-		<retries>0</retries>
-	</server>
-	<server type="OPENARENA" address="62.75.220.12:29990" status="UP">
-		<hostname>62.75.220.12:29990</hostname>
-		<name>*** Hunt Server</name>
-		<gametype>Quake3Arena</gametype>
-		<map>kineterra1</map>
-		<numplayers>0</numplayers>
-		<maxplayers>8</maxplayers>
-		<ping>98</ping>
-		<retries>0</retries>
-	</server>
-	<server type="OPENARENA" address="212.83.180.186:27965" status="UP">
-		<hostname>212.83.180.186:27965</hostname>
-		<name>E+_Excessive_CTF(Nsk)</name>
-		<gametype>Quake3Arena</gametype>
-		<map>ctf_compromise</map>
-		<numplayers>2</numplayers>
-		<maxplayers>10</maxplayers>
-		<ping>118</ping>
+	<server type="OPENARENA" address="176.31.254.6:27963" status="UP">
+		<hostname>176.31.254.6:27963</hostname>
+		<name>   ROFL ofci_Insta !</name>
+		<gametype></gametype>
+		<map>oa_bases7</map>
+		<numplayers>6</numplayers>
+		<maxplayers>16</maxplayers>
+		<ping>120</ping>
 		<retries>0</retries>
 	</server>
 	<server type="OPENARENA" address="149.56.47.113:27960" status="UP">
@@ -779,67 +879,57 @@
 		<map>rctf13</map>
 		<numplayers>0</numplayers>
 		<maxplayers>8</maxplayers>
-		<ping>197</ping>
+		<ping>200</ping>
 		<retries>0</retries>
 	</server>
-	<server type="OPENARENA" address="50.116.34.88:27962" status="UP">
-		<hostname>50.116.34.88:27962</hostname>
-		<name>   ciggaweed - CTF</name>
-		<gametype></gametype>
-		<map>ctf_gate1</map>
+	<server type="OPENARENA" address="212.83.180.186:27965" status="UP">
+		<hostname>212.83.180.186:27965</hostname>
+		<name>E+_Excessive_CTF(Nsk)</name>
+		<gametype>Quake3Arena</gametype>
+		<map>ctf_compromise</map>
 		<numplayers>2</numplayers>
-		<maxplayers>22</maxplayers>
-		<ping>203</ping>
+		<maxplayers>10</maxplayers>
+		<ping>113</ping>
+		<retries>0</retries>
+	</server>
+	<server type="OPENARENA" address="220.233.105.40:27960" status="UP">
+		<hostname>220.233.105.40:27960</hostname>
+		<name>Bondys OpenArena Server</name>
+		<gametype>Quake3Arena</gametype>
+		<map>oa_shouse</map>
+		<numplayers>2</numplayers>
+		<maxplayers>16</maxplayers>
+		<ping>390</ping>
 		<retries>0</retries>
 	</server>
 	<server type="OPENARENA" address="74.91.112.187:28000" status="UP">
 		<hostname>74.91.112.187:28000</hostname>
 		<name>America's #1 Server</name>
 		<gametype>Quake3Arena</gametype>
-		<map>oa_bases3</map>
+		<map>pul1ctf</map>
 		<numplayers>6</numplayers>
 		<maxplayers>20</maxplayers>
-		<ping>200</ping>
+		<ping>353</ping>
 		<retries>0</retries>
 	</server>
-	<server type="OPENARENA" address="37.153.1.43:27960" status="UP">
-		<hostname>37.153.1.43:27960</hostname>
-		<name>[WEBA ISP] DM</name>
+	<server type="OPENARENA" address="144.76.65.176:29762" status="UP">
+		<hostname>144.76.65.176:29762</hostname>
+		<name>GoD | Insta ReverseCTF</name>
+		<gametype>CTF</gametype>
+		<map>oacmpctf2</map>
+		<numplayers>2</numplayers>
+		<maxplayers>18</maxplayers>
+		<ping>327</ping>
+		<retries>0</retries>
+	</server>
+	<server type="OPENARENA" address="50.116.34.88:27962" status="UP">
+		<hostname>50.116.34.88:27962</hostname>
+		<name>   ciggaweed - CTF</name>
 		<gametype></gametype>
-		<map>czest1tourney</map>
-		<numplayers>3</numplayers>
-		<maxplayers>32</maxplayers>
-		<ping>64</ping>
-		<retries>0</retries>
-	</server>
-	<server type="OPENARENA" address="62.75.220.12:29555" status="UP">
-		<hostname>62.75.220.12:29555</hostname>
-		<name>H4L.True Combat</name>
-		<gametype>Quake3Arena</gametype>
-		<map>oxodm4</map>
-		<numplayers>0</numplayers>
-		<maxplayers>12</maxplayers>
-		<ping>111</ping>
-		<retries>0</retries>
-	</server>
-	<server type="OPENARENA" address="176.31.254.6:27960" status="UP">
-		<hostname>176.31.254.6:27960</hostname>
-		<name>   ROFL KIWI Insta DM !</name>
-		<gametype></gametype>
-		<map>q3dm6ish</map>
-		<numplayers>6</numplayers>
-		<maxplayers>16</maxplayers>
-		<ping>104</ping>
-		<retries>0</retries>
-	</server>
-	<server type="OPENARENA" address="178.62.60.27:27965" status="UP">
-		<hostname>178.62.60.27:27965</hostname>
-		<name>Cookie Duel EU</name>
-		<gametype>cookieduel</gametype>
-		<map>aggressor</map>
-		<numplayers>0</numplayers>
-		<maxplayers>8</maxplayers>
-		<ping>103</ping>
+		<map>oasago2</map>
+		<numplayers>2</numplayers>
+		<maxplayers>22</maxplayers>
+		<ping>375</ping>
 		<retries>0</retries>
 	</server>
 	<server type="OPENARENA" address="74.208.164.109:27960" status="UP">
@@ -847,73 +937,16 @@
 		<name>hightime vanilla gib</name>
 		<gametype>Quake3Arena</gametype>
 		<map>oa_pvomit</map>
-		<numplayers>5</numplayers>
+		<numplayers>4</numplayers>
 		<maxplayers>20</maxplayers>
-		<ping>258</ping>
+		<ping>332</ping>
 		<retries>0</retries>
 	</server>
-	<server type="OPENARENA" address="144.76.100.87:27993" status="UP">
-		<hostname>144.76.100.87:27993</hostname>
-		<name> -CITY-MAPS-OPENMAFIA-</name>
-		<gametype>city</gametype>
-		<map>zastavka</map>
-		<numplayers>2</numplayers>
-		<maxplayers>20</maxplayers>
-		<ping>110</ping>
-		<retries>0</retries>
+	<server type="OPENARENA" address="203.244.219.87:27960" status="TIMEOUT">
+		<hostname>203.244.219.87:27960</hostname>
 	</server>
-	<server type="OPENARENA" address="220.233.105.40:27960" status="UP">
-		<hostname>220.233.105.40:27960</hostname>
-		<name>Bondys OpenArena Server</name>
-		<gametype>Quake3Arena</gametype>
-		<map>oa_dm3</map>
-		<numplayers>2</numplayers>
-		<maxplayers>16</maxplayers>
-		<ping>336</ping>
-		<retries>0</retries>
-	</server>
-	<server type="OPENARENA" address="131.155.141.68:27961" status="UP">
-		<hostname>131.155.141.68:27961</hostname>
-		<name>  [Z] Normal CTF server</name>
-		<gametype>baseoa</gametype>
-		<map>oa_bases7</map>
-		<numplayers>2</numplayers>
-		<maxplayers>12</maxplayers>
-		<ping>116</ping>
-		<retries>0</retries>
-	</server>
-	<server type="OPENARENA" address="91.134.133.219:28000" status="UP">
-		<hostname>91.134.133.219:28000</hostname>
-		<name>ffaclassic /saf/</name>
-		<gametype></gametype>
-		<map>q3dm6ish</map>
-		<numplayers>0</numplayers>
-		<maxplayers>36</maxplayers>
-		<ping>116</ping>
-		<retries>0</retries>
-	</server>
-	<server type="OPENARENA" address="188.26.195.20:27992" status="UP">
-		<hostname>188.26.195.20:27992</hostname>
-		<name>DSotM#3 - Oasago2 CTF 818</name>
-		<gametype>Quake3Arena</gametype>
-		<map>oasago2</map>
-		<numplayers>2</numplayers>
-		<maxplayers>16</maxplayers>
-		<ping>136</ping>
-		<retries>0</retries>
-	</server>
-	<server type="OPENARENA" address="47.32.145.165:27970" status="UP">
-		<hostname>47.32.145.165:27970</hostname>
-		<name>(NRA)NorCal Freedom Fighters CTF</name>
-		<gametype></gametype>
-		<map>13vast</map>
-		<numplayers>8</numplayers>
-		<maxplayers>22</maxplayers>
-		<ping>286</ping>
-		<retries>0</retries>
-	</server>
-	<server type="OPENARENA" address="176.31.254.6:27964" status="TIMEOUT">
-		<hostname>176.31.254.6:27964</hostname>
+	<server type="OPENARENA" address="80.53.101.213:13598" status="TIMEOUT">
+		<hostname>80.53.101.213:13598</hostname>
 	</server>
 	<server type="OPENARENA" address="198.245.63.55:27777" status="TIMEOUT">
 		<hostname>198.245.63.55:27777</hostname>
@@ -921,8 +954,8 @@
 	<server type="OPENARENA" address="77.222.43.172:27960" status="TIMEOUT">
 		<hostname>77.222.43.172:27960</hostname>
 	</server>
-	<server type="OPENARENA" address="80.53.101.213:59668" status="TIMEOUT">
-		<hostname>80.53.101.213:59668</hostname>
+	<server type="OPENARENA" address="80.53.101.213:22788" status="TIMEOUT">
+		<hostname>80.53.101.213:22788</hostname>
 	</server>
 	<server type="OPENARENA" address="144.76.100.87:27961" status="TIMEOUT">
 		<hostname>144.76.100.87:27961</hostname>
@@ -930,19 +963,10 @@
 	<server type="OPENARENA" address="203.244.219.87:27962" status="TIMEOUT">
 		<hostname>203.244.219.87:27962</hostname>
 	</server>
-	<server type="OPENARENA" address="79.24.51.248:27960" status="TIMEOUT">
-		<hostname>79.24.51.248:27960</hostname>
-	</server>
-	<server type="OPENARENA" address="80.53.101.213:37706" status="TIMEOUT">
-		<hostname>80.53.101.213:37706</hostname>
+	<server type="OPENARENA" address="80.53.101.213:17034" status="TIMEOUT">
+		<hostname>80.53.101.213:17034</hostname>
 	</server>
 	<server type="OPENARENA" address="203.244.219.87:27961" status="TIMEOUT">
 		<hostname>203.244.219.87:27961</hostname>
-	</server>
-	<server type="OPENARENA" address="203.244.219.87:27960" status="TIMEOUT">
-		<hostname>203.244.219.87:27960</hostname>
-	</server>
-	<server type="OPENARENA" address="80.53.101.213:48709" status="TIMEOUT">
-		<hostname>80.53.101.213:48709</hostname>
 	</server>
 </qstat>

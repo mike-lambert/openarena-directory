@@ -57,6 +57,17 @@ public class GeoIpModel {
     }
 
     @Test
+    public void samePathLocations() throws Exception {
+        System.out.println("Paths are same but content differs");
+        Path path1 = new Path("NSK", new Node("Russia", new Node("NSO", new Node("Novosibirsk", new Node("630058", new ValueNode<String>("Cyberspace Labs", "cyberspacelabs.ru:27950"))))));
+        Path path2 = new Path("NSK", new Node("Russia", new Node("NSO", new Node("Novosibirsk", new Node("630058", new ValueNode<String>("Cyberspace Labs 2", "cyberspacelabs.ru:27951"))))));
+        System.out.println(path1.getPath());
+        System.out.println(path2.getPath());
+        System.out.println("__________________________________________________________________________________________");
+        Assert.assertEquals(true, path1.isSameLocation(path2));
+    }
+
+    @Test
     public void pathComponentsNotNull() throws Exception {
         System.out.println("Path components not null");
         Path path1 = new Path("NSK", new Node("Russia", new Node("NSO", new Node("Novosibirsk", new Node("630058", new ValueNode<String>("Cyberspace Labs", "cyberspacelabs.ru:27950"))))));

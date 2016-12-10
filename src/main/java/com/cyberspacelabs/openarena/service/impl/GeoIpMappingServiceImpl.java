@@ -7,29 +7,31 @@ import com.cyberspacelabs.openarena.service.GeoIpMappingService;
 import com.cyberspacelabs.openarena.service.GeoIpResolutionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArraySet;
 
+@Service
 public class GeoIpMappingServiceImpl implements GeoIpMappingService {
 
-    @Value("${geoip.cache.path}")
+    @Value("${geoip.mapping.cache.path:'./.geoip/mapping'}")
     private String cachePath;
     private Map<String, Path<Set<OpenArenaServerRecord>>> reverseCache;
-    private Map<OpenArenaServerRecord, Path<Set<OpenArenaServerRecord>>> cache;
+    private Set<Path<Set<OpenArenaServerRecord>>> cache;
     @Autowired
     private GeoIpResolutionService resolutionService;
 
 
-    public GeoIpMappingServiceImpl(){
-        cachePath = "./.geoip";
+    public GeoIpMappingServiceImpl() {
+        cachePath = "./.geoip/mapping";
         reverseCache = new ConcurrentHashMap<>();
-        cache = new ConcurrentHashMap<>();
+        cache = new CopyOnWriteArraySet<>();
     }
 
-    public GeoIpMappingServiceImpl(GeoIpResolutionService resolver){
+    public GeoIpMappingServiceImpl(GeoIpResolutionService resolver) {
         this();
         resolutionService = resolver;
     }
@@ -48,22 +50,27 @@ public class GeoIpMappingServiceImpl implements GeoIpMappingService {
     public void register(Path<OpenArenaServerRecord> entry) {
         OpenArenaServerRecord record = entry.getValue();
         String ip = getHostAddress(record);
-        Path<Set<OpenArenaServerRecord>> geo = cache.get(record);
-        if (geo == null){
-            try {
-                Path address = resolutionService.resolve(ip);
-                Set<OpenArenaServerRecord> set = new CopyOnWriteArraySet<>();
-                set.add(record);
-                geo = new Path<Set<OpenArenaServerRecord>>(address.getName(), address.getCountry(), address.getRegion(), address.getCity(), address.getZipCode(),
-                        address.getCity()+"/"+ address.getZipCode(),
-                        set
-                );
-                cache.put(record, geo);
-            } catch (Exception e) {
-                e.printStackTrace();
-                return;
+        Path<Set<OpenArenaServerRecord>> geo;
+        try {
+            Path address = resolutionService.resolve(ip);
+            geo = cache.stream().filter(path -> path.isSameLocation(address))
+                    .findFirst().get();
+            if (geo == null) {
+                String marker = address.getCity() + "/" +address.getZipCode();
+                geo = new Path<>(marker,
+                        address.getCountry(),
+                        address.getRegion(),
+                        address.getCity(),
+                        address.getZipCode(),
+                        marker, new CopyOnWriteArraySet<>());
+                cache.add(geo);
             }
+            geo.getValue(Set.class).add(record);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return;
         }
+
         reverseCache.put(ip, geo);
         saveCache();
     }
@@ -75,7 +82,7 @@ public class GeoIpMappingServiceImpl implements GeoIpMappingService {
     private String getHostAddress(OpenArenaServerRecord record) {
         String endpoint = record.getAddress();
         int port = endpoint.indexOf(":");
-        if (port == -1){
+        if (port == -1) {
             return endpoint;
         } else {
             return endpoint.substring(0, port);

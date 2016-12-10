@@ -22,6 +22,15 @@ public class ServerDTO {
     private String mode;
     private String map;
     private LocationDTO location;
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getType() {
         return type;

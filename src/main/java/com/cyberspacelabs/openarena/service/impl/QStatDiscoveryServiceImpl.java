@@ -6,6 +6,7 @@ import com.cyberspacelabs.openarena.model.qstat.Qstat;
 import com.cyberspacelabs.openarena.service.QStatConversionService;
 import com.cyberspacelabs.openarena.service.QStatDiscoveryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.xml.bind.JAXBContext;
 import java.io.File;
@@ -14,6 +15,7 @@ import java.util.Collection;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@Service
 public class QStatDiscoveryServiceImpl  implements QStatDiscoveryService{
 
     private long refreshInterval;

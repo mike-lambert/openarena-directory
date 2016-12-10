@@ -4,10 +4,12 @@ import com.cyberspacelabs.openarena.model.OpenArenaDiscoveryRecord;
 import com.cyberspacelabs.openarena.service.OpenArenaDirectoryService;
 import com.cyberspacelabs.openarena.service.QStatDiscoveryServiceFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 
+@Service
 public class OpenArenaDirectoryServiceImpl implements OpenArenaDirectoryService {
     @Autowired
     private QStatDiscoveryServiceFactory discoveryServiceFactory;

@@ -110,4 +110,8 @@ public class Path<V> {
                 + "/" + getRootNode().getNextNode().getNextNode().getName()
                 + "/" + getRootNode().getNextNode().getNextNode().getNextNode().getName();
     }
+
+    public boolean isSameLocation(Path another){
+        return this.equals(another) || this.getPath().equals(another.getPath());
+    }
 }

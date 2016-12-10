@@ -13,7 +13,9 @@ import org.springframework.stereotype.Service;
 
 import java.io.*;
 import java.text.SimpleDateFormat;
+import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 @PropertySources({
         @PropertySource(value = "application.properties", ignoreResourceNotFound = true),
@@ -21,11 +23,17 @@ import java.util.UUID;
 })
 @Service
 public class GeoIpResolutionServiceImpl implements GeoIpResolutionService, CountryFlagPictureService {
-    @Value("${countries.flags.directory}")
+    @Value("${countries.flags.directory:'./.geoip/flags'}")
     private String flagCachePath;
 
+    @Value("${geoip.resolving.cache.path:'./.geoip/v4'}")
+    private String cachePath;
+    private Map<String, Path<String>> cache;
+
     public GeoIpResolutionServiceImpl(){
-        flagCachePath = ".country-flags.png";
+        flagCachePath = "./.geoip/flags";
+        cachePath = "./.geoip/v4";
+        cache = new ConcurrentHashMap<>();
     }
 
     public static class FreeGeoIpResponse {
@@ -44,14 +52,22 @@ public class GeoIpResolutionServiceImpl implements GeoIpResolutionService, Count
 
     @Override
     public Path<String> resolve(String ip) throws Exception {
-        InputStream in = new OkHttpClient().newCall(new Request.Builder().url("https://freegeoip.net/json/" + ip).build())
-                .execute()
-                .body().byteStream();
-        FreeGeoIpResponse response = new ObjectMapper().readValue(in, FreeGeoIpResponse.class);
-        ensureCountryFlagCache(response.country_code);
-        Path result = new Path<>("IPv4:" + ip, response.country_name, response.region_name, response.city, response.zip_code, "IP", ip);
-        result.setCountryCode(response.country_code);
-        return result;
+        if (cache.get(ip) == null){
+            InputStream in = new OkHttpClient().newCall(new Request.Builder().url("https://freegeoip.net/json/" + ip).build())
+                    .execute()
+                    .body().byteStream();
+            FreeGeoIpResponse response = new ObjectMapper().readValue(in, FreeGeoIpResponse.class);
+            ensureCountryFlagCache(response.country_code);
+            Path result = new Path<>("IPv4:" + ip, response.country_name, response.region_name, response.city, response.zip_code, "IP", ip);
+            result.setCountryCode(response.country_code);
+            cache.put(ip, result);
+            saveCache();
+        }
+        return cache.get(ip);
+    }
+
+    private void saveCache() {
+
     }
 
     private void ensureCountryFlagCache(String countryCode) {
