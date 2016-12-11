@@ -54,3 +54,7 @@
     visibility: hidden;
     display: table-column;
   }
+
+  .text-row {
+    padding: 5px 5px;
+  }
