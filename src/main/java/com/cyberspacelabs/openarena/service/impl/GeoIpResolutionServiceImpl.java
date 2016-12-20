@@ -4,6 +4,7 @@ import com.cyberspacelabs.openarena.model.geoip.Path;
 import com.cyberspacelabs.openarena.service.CountryFlagPictureService;
 import com.cyberspacelabs.openarena.service.GeoIpResolutionService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,11 +12,16 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.atomic.AtomicLong;
 
 @PropertySources({
         @PropertySource(value = "application.properties", ignoreResourceNotFound = true),
@@ -23,17 +29,32 @@ import java.util.concurrent.ConcurrentHashMap;
 })
 @Service
 public class GeoIpResolutionServiceImpl implements GeoIpResolutionService, CountryFlagPictureService {
-    @Value("${countries.flags.directory:'./.geoip/flags'}")
+    @Value("${countries.flags.directory:./.geoip/flags}")
     private String flagCachePath;
 
-    @Value("${geoip.resolving.cache.path:'./.geoip/v4'}")
+    @Value("${geoip.resolving.cache.path:./.geoip/v4}")
     private String cachePath;
     private Map<String, Path<String>> cache;
+    private ExecutorService cacheSaver;
+    private AtomicLong threadCounter;
 
     public GeoIpResolutionServiceImpl(){
         flagCachePath = "./.geoip/flags";
         cachePath = "./.geoip/v4";
         cache = new ConcurrentHashMap<>();
+        threadCounter = new AtomicLong(0);
+        cacheSaver = Executors.newSingleThreadExecutor(new ThreadFactory() {
+            @Override
+            public Thread newThread(Runnable r) {
+                Thread runner = new Thread(r);
+                runner.setDaemon(true);
+                runner.setName(GeoIpResolutionServiceImpl.class.getSimpleName()
+                        + "-Saver::"
+                        + new SimpleDateFormat("yyyyMMddHHmmssXXX")
+                        + "." + threadCounter.incrementAndGet());
+                return runner;
+            }
+        });
     }
 
     public static class FreeGeoIpResponse {
@@ -67,11 +88,28 @@ public class GeoIpResolutionServiceImpl implements GeoIpResolutionService, Count
     }
 
     private void saveCache() {
-
+        cacheSaver.submit(() -> {
+            File root = new File(cachePath);
+            root.mkdirs();
+            cache.entrySet().parallelStream().forEach(entry -> {
+                String path = entry.getKey().replace(".", "/");
+                File folder = new File(root, path);
+                folder.mkdirs();
+                ObjectMapper json = new ObjectMapper();
+                json.enable(SerializationFeature.INDENT_OUTPUT);
+                File target = new File(folder, entry.getValue().getValue());
+                try {
+                    json.writeValue(target, entry.getValue());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+        });
     }
 
     private void ensureCountryFlagCache(String countryCode) {
-        Thread downloader = new Thread(() -> {
+        cacheSaver.submit(() -> {
+            ensureFlagCacheDirectory();
             File file = new File(flagCachePath, countryCode + ".png");
             if (!file.exists()){
                 try {
@@ -81,9 +119,10 @@ public class GeoIpResolutionServiceImpl implements GeoIpResolutionService, Count
                 }
             }
         });
-        downloader.setDaemon(true);
-        downloader.setName(this.getClass().getSimpleName()+ "-Downloader::" + new SimpleDateFormat("yyyyMMddHHmmssSSSXXX") + "." + UUID.randomUUID());
-        downloader.start();
+    }
+
+    private void ensureFlagCacheDirectory() {
+        new File(flagCachePath).mkdirs();
     }
 
     @Override
@@ -145,5 +184,47 @@ public class GeoIpResolutionServiceImpl implements GeoIpResolutionService, Count
 
     public void setFlagCachePath(String flagCachePath) {
         this.flagCachePath = flagCachePath;
+    }
+
+    public int cacheSize(){
+        return cache.size();
+    }
+
+    @PostConstruct
+    public void loadCache(){
+        ObjectMapper json = new ObjectMapper();
+        File root = new File(cachePath);
+        root.mkdirs();
+        for(File level1 : root.listFiles()){
+            if (level1.isDirectory()){
+                for(File level2 : level1.listFiles()){
+                    if (level2.isDirectory()){
+                        for(File level3 : level2.listFiles()){
+                            if (level3.isDirectory()){
+                                for (File level4 : level3.listFiles()){
+                                    if (level4.isDirectory()){
+                                        for(File entry : level4.listFiles()){
+                                            if (entry.isFile()){
+                                                Path<String> path = null;
+                                                try {
+                                                    System.out.println(this.getClass().getSimpleName() + ".loadCache: reading " + entry.getAbsolutePath());
+                                                    path = json.readValue(entry, Path.class);
+                                                    String ip = path.getValue();
+                                                    System.out.println(this.getClass().getSimpleName() + ".loadCache: " + ip + " <- " + path.getPath() + " [" + path.getCountryCode() + "]");
+                                                    cache.put(ip, path);
+                                                } catch (IOException e) {
+                                                    e.printStackTrace();
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        System.out.println("GeoIP cache: " + cache.size());
     }
 }

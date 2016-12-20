@@ -1,14 +1,19 @@
 package unit;
 
 import com.cyberspacelabs.openarena.model.OpenArenaServerRecord;
+import com.cyberspacelabs.openarena.model.geoip.ProximityLevel;
 import com.cyberspacelabs.openarena.model.geoip.ValueNode;
 import com.cyberspacelabs.openarena.model.geoip.Node;
 import com.cyberspacelabs.openarena.model.geoip.Path;
+import com.cyberspacelabs.openarena.service.impl.GeoIpMappingServiceImpl;
 import com.cyberspacelabs.openarena.service.impl.GeoIpResolutionServiceImpl;
+import com.cyberspacelabs.openarena.service.impl.QStatDiscoveryServiceFactoryImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import org.junit.Assert;
 import org.junit.Test;
+
+import java.util.Set;
 
 public class GeoIpModel {
 
@@ -122,5 +127,53 @@ public class GeoIpModel {
         Assert.assertNotNull(deser);
         Assert.assertEquals(geo, deser);
         Assert.assertEquals(rec1, deser.getValue());
+    }
+
+    @Test
+    public void nearbyAll() throws Exception {
+        GeoIpResolutionServiceImpl resolver = new GeoIpResolutionServiceImpl();
+        resolver.loadCache();
+        GeoIpMappingServiceImpl mapper = new GeoIpMappingServiceImpl(resolver);
+        mapper.loadCache();
+        QStatDiscoveryServiceFactoryImpl discoveryServiceFactory = new QStatDiscoveryServiceFactoryImpl();
+        discoveryServiceFactory.instantiate()
+            .forEach(instance -> {
+                instance.getLatestDiscoveryResults().getRecords().forEach(record -> {
+                    try {
+                        System.out.println(mapper.locate(record));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        Assert.fail();
+                    }
+                });
+            });
+
+        Set<OpenArenaServerRecord> records = mapper.nearby("212.164.234.91", ProximityLevel.GLOBAL);
+        System.out.println("All: " + records.size());
+        Assert.assertNotEquals(true, records.isEmpty());
+    }
+
+    @Test
+    public void nearbyCountry() throws Exception {
+        GeoIpResolutionServiceImpl resolver = new GeoIpResolutionServiceImpl();
+        resolver.loadCache();
+        GeoIpMappingServiceImpl mapper = new GeoIpMappingServiceImpl(resolver);
+        mapper.loadCache();
+        QStatDiscoveryServiceFactoryImpl discoveryServiceFactory = new QStatDiscoveryServiceFactoryImpl();
+        discoveryServiceFactory.instantiate()
+                .forEach(instance -> {
+                    instance.getLatestDiscoveryResults().getRecords().forEach(record -> {
+                        try {
+                            System.out.println(mapper.locate(record));
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            Assert.fail();
+                        }
+                    });
+                });
+
+        Set<OpenArenaServerRecord> records = mapper.nearby("212.164.234.91", ProximityLevel.COUNTRY);
+        System.out.println("Russia: " + records.size());
+        Assert.assertNotEquals(true, records.isEmpty());
     }
 }

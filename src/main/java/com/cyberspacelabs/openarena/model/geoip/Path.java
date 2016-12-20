@@ -1,7 +1,11 @@
 package com.cyberspacelabs.openarena.model.geoip;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
+@JsonTypeInfo(use = JsonTypeInfo.Id.CLASS,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "type")
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Path<V> {
     private Node rootNode;
@@ -88,7 +92,7 @@ public class Path<V> {
         return ((ValueNode<T>)getRootNode().getNextNode().getNextNode().getNextNode().getNextNode()).getValue();
     }
 
-    public <V> V getValue(){
+    public V getValue(){
         return ((ValueNode<V>)getRootNode().getNextNode().getNextNode().getNextNode().getNextNode()).getValue();
     }
 
