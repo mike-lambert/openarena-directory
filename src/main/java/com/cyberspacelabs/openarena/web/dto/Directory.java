@@ -49,12 +49,12 @@ import java.util.List;
  ]
  }
  */
-public class DirectoryDTO {
+public class Directory {
     private String updated;
     private String retrieved;
-    private List<ServerDTO> servers;
+    private List<Server> servers;
 
-    public DirectoryDTO(){
+    public Directory(){
         retrieved = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss XXX").format(new Date());
         servers = new ArrayList<>();
     }
@@ -75,11 +75,11 @@ public class DirectoryDTO {
         this.retrieved = retrieved;
     }
 
-    public List<ServerDTO> getServers() {
+    public List<Server> getServers() {
         return servers;
     }
 
-    public void setServers(List<ServerDTO> servers) {
+    public void setServers(List<Server> servers) {
         this.servers = servers;
     }
 }

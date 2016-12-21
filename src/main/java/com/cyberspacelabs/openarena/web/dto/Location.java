@@ -6,7 +6,7 @@ package com.cyberspacelabs.openarena.web.dto;
  "domain": "Russia/Novosibirsk/Novosibirsk"
  }
  */
-public class LocationDTO {
+public class Location {
     private String code;
     private String domain;
 

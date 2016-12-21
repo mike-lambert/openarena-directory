@@ -8,30 +8,30 @@ import com.cyberspacelabs.openarena.service.GeoIpMappingService;
 import com.cyberspacelabs.openarena.service.GeoIpResolutionService;
 import com.cyberspacelabs.openarena.service.OpenArenaDirectoryService;
 import com.cyberspacelabs.openarena.web.controller.rest.DirectoryController;
-import com.cyberspacelabs.openarena.web.dto.DirectoryDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.collect.Lists;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultMatcher;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.stream.Collectors;
 
-import static org.hamcrest.Matchers.any;
 import static org.hamcrest.Matchers.containsString;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class Directory {
@@ -57,7 +57,8 @@ public class Directory {
         this.mvc = MockMvcBuilders.standaloneSetup(controller).build();
         decoratedPath.setCountryCode("RU");
 
-        when(directoryService.enumerate()).thenReturn(createTestDiscoverySet());
+        when(directoryService.enumerateDiscoveryServers()).thenReturn(createTestDiscoveryServerList());
+        when(directoryService.refreshDiscovery()).thenReturn(createTestDiscoverySet());
         when(mappingService.nearby(anyString(), eq(ProximityLevel.GLOBAL))).thenReturn(createTestRecordSet());
         when(mappingService.nearby(anyString(), eq(ProximityLevel.COUNTRY))).thenReturn(
                 createTestRecordSet()
@@ -66,6 +67,10 @@ public class Directory {
                         .collect(Collectors.toSet())
         );
         when(resolutionService.resolve(anyString())).thenReturn(decoratedPath);
+    }
+
+    private List<String> createTestDiscoveryServerList() {
+        return Arrays.asList("dpmaster.deathmask.net:27960", "cyberspacelabs.ru:27960");
     }
 
     @Test
@@ -77,6 +82,17 @@ public class Directory {
         .andExpect(status().isOk())
         .andExpect(content().string(containsString("cyberspacelabs.ru:")))
         .andDo(mvcResult -> System.out.println(mvcResult.getResponse().getContentAsString()));
+    }
+
+    @Test
+    public void directoryServersListed() throws Exception {
+        this.mvc.perform(
+                get("/api/directory/discovery/list")
+        )
+                .andExpect(status().isOk())
+                .andExpect(header().string("Content-Type", "application/json;charset=UTF-8"))
+                .andExpect(content().string(containsString("cyberspacelabs.ru:")))
+                .andDo(mvcResult -> System.out.println(mvcResult.getResponse().getContentAsString()));
     }
 
     @Test
@@ -111,7 +127,7 @@ public class Directory {
         .andExpect(status().isOk())
         .andExpect(
             result -> {
-                if (deserializeJson(result.getResponse().getContentAsString(), DirectoryDTO.class).getServers().size() != 5) {
+                if (deserializeJson(result.getResponse().getContentAsString(), com.cyberspacelabs.openarena.web.dto.Directory.class).getServers().size() != 5) {
                     throw new IllegalStateException("Not all records returned (expected 5): \r\n" + result.getResponse().getContentAsString());
                 }
             }
@@ -125,7 +141,7 @@ public class Directory {
         .andExpect(
             result -> {
                 int expc = 4;
-                int size = deserializeJson(result.getResponse().getContentAsString(), DirectoryDTO.class).getServers().size();
+                int size = deserializeJson(result.getResponse().getContentAsString(), com.cyberspacelabs.openarena.web.dto.Directory.class).getServers().size();
                 if (size != expc) {
                     throw new IllegalStateException("Record count mismatch: " + size +" (expected " + expc +"): \r\n"
                         + result.getResponse().getContentAsString());
@@ -141,7 +157,7 @@ public class Directory {
         .andExpect(
             result -> {
                 int expc = 3;
-                int size = deserializeJson(result.getResponse().getContentAsString(), DirectoryDTO.class).getServers().size();
+                int size = deserializeJson(result.getResponse().getContentAsString(), com.cyberspacelabs.openarena.web.dto.Directory.class).getServers().size();
                 if (size != expc) {
                     throw new IllegalStateException("Record count mismatch: " + size +" (expected " + expc +"): \r\n"
                         + result.getResponse().getContentAsString());
@@ -157,7 +173,7 @@ public class Directory {
         .andExpect(
             result -> {
                 int expc = 2;
-                int size = deserializeJson(result.getResponse().getContentAsString(), DirectoryDTO.class).getServers().size();
+                int size = deserializeJson(result.getResponse().getContentAsString(), com.cyberspacelabs.openarena.web.dto.Directory.class).getServers().size();
                 if (size != expc) {
                     throw new IllegalStateException("Record count mismatch: " + size +" (expected " + expc +"): \r\n"
                         + result.getResponse().getContentAsString());
@@ -173,7 +189,7 @@ public class Directory {
         .andExpect(
             result -> {
                 int expc = 1;
-                int size = deserializeJson(result.getResponse().getContentAsString(), DirectoryDTO.class).getServers().size();
+                int size = deserializeJson(result.getResponse().getContentAsString(), com.cyberspacelabs.openarena.web.dto.Directory.class).getServers().size();
                 if (size != expc) {
                     throw new IllegalStateException("Record count mismatch: " + size +" (expected " + expc +"): \r\n"
                         + result.getResponse().getContentAsString());

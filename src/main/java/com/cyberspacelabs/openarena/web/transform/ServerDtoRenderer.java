@@ -1,19 +1,19 @@
 package com.cyberspacelabs.openarena.web.transform;
 
-import com.cyberspacelabs.openarena.web.dto.ServerDTO;
+import com.cyberspacelabs.openarena.web.dto.Server;
 
 /**
  * Created by mike on 10.12.16.
  */
 public class ServerDtoRenderer {
-    public String renderServerType(ServerDTO server){
+    public String renderServerType(Server server){
         String title = server.getType().equalsIgnoreCase("OPENARENA") ? "OpenArena" : "Quake 3";
         String icon = server.getType().equalsIgnoreCase("OPENARENA") ? "../static/icon_openarena.png" : "../static/icon_quake3.png";
         return  "<img alt=\"" + title + "\" title=\"" + title +"\" src=\""+ icon + "\" width=\"32\"/>" +
                 "<span class=\"text-value\">" + title +"</span>";
     }
 
-    public String renderServerPing(ServerDTO server){
+    public String renderServerPing(Server server){
         String led = "led-red";
         if (server.getPing() <= 100){ led = "led-green"; }
         else if (server.getPing() > 100 && server.getPing() <= 300){ led = "led-yellow"; }
@@ -21,7 +21,7 @@ public class ServerDtoRenderer {
                 "<span class=\"text-value\">"+ server.getPing() + "</span></div>";
     }
 
-    public String renderServerLoad(ServerDTO server){
+    public String renderServerLoad(Server server){
         String[] values = server.getLoad().split("/", 2);
         int present = Integer.parseInt(values[0]);
         int total = Integer.parseInt(values[1]);
@@ -32,7 +32,7 @@ public class ServerDtoRenderer {
         return "<span class=\""+ style +"\">"+ server.getLoad() +"</span>";
     }
 
-    public String renderServerLocation(ServerDTO server){
+    public String renderServerLocation(Server server){
         String result = "";
         if (server.getLocation() == null || server.getLocation().getDomain() == null || server.getLocation().getDomain().isEmpty()){
             return "&lt;Unknown&gt;";
@@ -46,7 +46,7 @@ public class ServerDtoRenderer {
                "<span>" + server.getLocation().getDomain() +"</span>";
     }
 
-    public String render(ServerDTO server){
+    public String render(Server server){
         StringBuilder sb = new StringBuilder();
         sb.append("<tr>").append("\r\n")
                 .append(" <td>").append(server.getName()).append("</td>").append("\r\n")

@@ -2,13 +2,13 @@ package com.cyberspacelabs.openarena.web.transform;
 
 import com.cyberspacelabs.openarena.model.geoip.Path;
 import com.cyberspacelabs.openarena.service.GeoIpResolutionService;
-import com.cyberspacelabs.openarena.web.dto.DirectoryDTO;
+import com.cyberspacelabs.openarena.web.dto.Directory;
 
 /**
  * Created by mike on 10.12.16.
  */
 public class ServerLocationDecorator {
-    public void decorate(DirectoryDTO directory, GeoIpResolutionService resolutionService) {
+    public void decorate(Directory directory, GeoIpResolutionService resolutionService) {
         directory.getServers().parallelStream().forEach(server -> {
             try {
                 Path<String> path = resolutionService.resolve(getHost(server.getAddress()));

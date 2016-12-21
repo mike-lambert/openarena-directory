@@ -14,14 +14,14 @@ package com.cyberspacelabs.openarena.web.dto;
  "map": "oasago2"
  }
  */
-public class ServerDTO {
+public class Server {
     private String type;
     private long ping;
     private String load;
     private String address;
     private String mode;
     private String map;
-    private LocationDTO location;
+    private Location location;
     private String name;
 
     public String getName() {
@@ -80,11 +80,11 @@ public class ServerDTO {
         this.map = map;
     }
 
-    public LocationDTO getLocation() {
+    public Location getLocation() {
         return location;
     }
 
-    public void setLocation(LocationDTO location) {
+    public void setLocation(Location location) {
         this.location = location;
     }
 }

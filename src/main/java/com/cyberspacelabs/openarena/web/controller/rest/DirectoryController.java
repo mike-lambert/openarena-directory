@@ -4,7 +4,7 @@ import com.cyberspacelabs.openarena.model.geoip.ProximityLevel;
 import com.cyberspacelabs.openarena.service.GeoIpMappingService;
 import com.cyberspacelabs.openarena.service.GeoIpResolutionService;
 import com.cyberspacelabs.openarena.service.OpenArenaDirectoryService;
-import com.cyberspacelabs.openarena.web.dto.DirectoryDTO;
+import com.cyberspacelabs.openarena.web.dto.Directory;
 import com.cyberspacelabs.openarena.web.transform.DiscoveryRecordToDirectoryDTO;
 import com.cyberspacelabs.openarena.web.transform.ServerLocationDecorator;
 import com.cyberspacelabs.openarena.web.transform.ServerRecordSetToDirectoryDTO;
@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/directory")
@@ -29,16 +30,21 @@ public class DirectoryController {
     private GeoIpResolutionService resolutionService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public DirectoryDTO all() throws Exception{
-        DirectoryDTO directory = new DiscoveryRecordToDirectoryDTO().apply(directoryService.enumerate());
+    public Directory all() throws Exception{
+        Directory directory = new DiscoveryRecordToDirectoryDTO().apply(directoryService.refreshDiscovery());
         new ServerLocationDecorator().decorate(directory, resolutionService);
         return directory;
     }
 
     @RequestMapping(value = "/nearby/{level}",method = RequestMethod.GET)
-    public DirectoryDTO nearby(@PathVariable("level")ProximityLevel level, HttpServletRequest request) throws Exception{
-        DirectoryDTO directory = new ServerRecordSetToDirectoryDTO().apply(mappingService.nearby(request.getRemoteAddr(), level));
+    public Directory nearby(@PathVariable("level")ProximityLevel level, HttpServletRequest request) throws Exception{
+        Directory directory = new ServerRecordSetToDirectoryDTO().apply(mappingService.nearby(request.getRemoteAddr(), level));
         new ServerLocationDecorator().decorate(directory, resolutionService);
         return  directory;
+    }
+
+    @RequestMapping(value = "/discovery/list", method = RequestMethod.GET)
+    public List<String> listDiscoveryServers() throws Exception{
+        return directoryService.enumerateDiscoveryServers();
     }
 }

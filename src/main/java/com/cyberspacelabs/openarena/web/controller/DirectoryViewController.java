@@ -1,12 +1,10 @@
 package com.cyberspacelabs.openarena.web.controller;
 
-import com.cyberspacelabs.openarena.model.OpenArenaServerRecord;
-import com.cyberspacelabs.openarena.model.geoip.Path;
 import com.cyberspacelabs.openarena.model.geoip.ProximityLevel;
 import com.cyberspacelabs.openarena.service.GeoIpMappingService;
 import com.cyberspacelabs.openarena.service.GeoIpResolutionService;
 import com.cyberspacelabs.openarena.service.OpenArenaDirectoryService;
-import com.cyberspacelabs.openarena.web.dto.DirectoryDTO;
+import com.cyberspacelabs.openarena.web.dto.Directory;
 import com.cyberspacelabs.openarena.web.transform.DiscoveryRecordToDirectoryDTO;
 import com.cyberspacelabs.openarena.web.transform.ServerDtoRenderer;
 import com.cyberspacelabs.openarena.web.transform.ServerLocationDecorator;
@@ -37,19 +35,19 @@ public class DirectoryViewController {
 
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView index(HttpServletRequest request) throws Exception{
-        DirectoryDTO directory = new DiscoveryRecordToDirectoryDTO().apply(directoryService.enumerate());
+        Directory directory = new DiscoveryRecordToDirectoryDTO().apply(directoryService.refreshDiscovery());
         new ServerLocationDecorator().decorate(directory, resolutionService);
         return createDirectoryMV(request, directory);
     }
 
     @RequestMapping("/nearby/{level}")
     public ModelAndView nearby(HttpServletRequest request, @PathVariable("level")ProximityLevel level) throws Exception {
-        DirectoryDTO directory = new ServerRecordSetToDirectoryDTO().apply(mappingService.nearby(request.getRemoteAddr(), level));
+        Directory directory = new ServerRecordSetToDirectoryDTO().apply(mappingService.nearby(request.getRemoteAddr(), level));
         new ServerLocationDecorator().decorate(directory, resolutionService);
         return createDirectoryMV(request, directory);
     }
 
-    private ModelAndView createDirectoryMV(HttpServletRequest request, DirectoryDTO directory){
+    private ModelAndView createDirectoryMV(HttpServletRequest request, Directory directory){
         ModelAndView result = new ModelAndView("directory");
         result.addObject("request", request);
         result.addObject("renderer", new ServerDtoRenderer());
