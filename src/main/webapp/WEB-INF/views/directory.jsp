@@ -65,7 +65,7 @@
   </div>
  </div>
  <div style="position: absolute; bottom: 0; font-size: 10px; font-family: Coda;">
-  <div style="margin: 0 auto;">IP: ${request.getRemoteAddr()}</div>
+  <div style="margin: 0 auto;">IP: ${request.getRemoteAddr()} &nbsp; | &nbsp; ${location}</div>
  </div>
 </body>
 </html>
