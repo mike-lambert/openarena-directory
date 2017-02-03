@@ -4,6 +4,7 @@ import com.cyberspacelabs.openarena.model.OpenArenaDiscoveryRecord;
 import com.cyberspacelabs.openarena.model.OpenArenaServerRecord;
 import com.cyberspacelabs.openarena.service.QStatDiscoveryService;
 import com.cyberspacelabs.openarena.service.QStatDiscoveryServiceFactory;
+import com.cyberspacelabs.openarena.service.impl.NativeDiscoveryServiceImpl;
 import com.cyberspacelabs.openarena.service.impl.QStatConversionServiceImpl;
 import com.cyberspacelabs.openarena.service.impl.QStatDiscoveryServiceFactoryImpl;
 import com.cyberspacelabs.openarena.service.impl.QStatDiscoveryServiceImpl;
@@ -46,5 +47,15 @@ public class Discovery {
         Assert.assertNotNull(services);
         Assert.assertNotEquals(true, services.isEmpty());
         Assert.assertNotEquals(true, servers.isEmpty());
+    }
+
+    @Test
+    public void nativeDiscoveryWorks() throws Exception {
+        System.out.println("Native discovery service works");
+        NativeDiscoveryServiceImpl ds = new NativeDiscoveryServiceImpl();
+        OpenArenaDiscoveryRecord result = ds.getLatestDiscoveryResults();
+        Assert.assertNotNull(result);
+        result.getRecords().forEach(record -> System.out.println(record));
+        Assert.assertNotEquals(true, result.getRecords().isEmpty());
     }
 }
