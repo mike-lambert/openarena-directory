@@ -36,6 +36,8 @@ public class QStatDiscoveryServiceFactoryImpl implements QStatDiscoveryServiceFa
         public String server;
         public String report;
         public long expires;
+        public boolean useNativeClient;
+        public long nativeClientTimeout;
     }
     @Value("${qstat.factory.config:'classpath:discovery.json'}")
     private String discoveryServicesConfigurationLocation;
@@ -77,12 +79,23 @@ public class QStatDiscoveryServiceFactoryImpl implements QStatDiscoveryServiceFa
     }
 
     private QStatDiscoveryService configureInstance(QStatDiscoveryServiceConfiguration serviceConfig, QStatDiscoveryServiceFactoryConfiguration factoryConfig) {
-        QStatDiscoveryServiceImpl result = new QStatDiscoveryServiceImpl(new QStatConversionServiceImpl());
-        result.setUseWine(factoryConfig.wine);
-        result.setQstatBinaryLocation(factoryConfig.qstat);
-        result.setQstatXmlReport(serviceConfig.report);
-        result.setDiscoveryServiceEndpoint(serviceConfig.server);
-        result.setRefreshInterval(serviceConfig.expires);
+        QStatDiscoveryService result = null;
+        if (!serviceConfig.useNativeClient){
+            QStatDiscoveryServiceImpl wrapped = new QStatDiscoveryServiceImpl(new QStatConversionServiceImpl());
+            wrapped.setUseWine(factoryConfig.wine);
+            wrapped.setQstatBinaryLocation(factoryConfig.qstat);
+            wrapped.setQstatXmlReport(serviceConfig.report);
+            wrapped.setDiscoveryServiceEndpoint(serviceConfig.server);
+            wrapped.setRefreshInterval(serviceConfig.expires);
+            result = wrapped;
+        } else {
+            NativeDiscoveryServiceImpl nativeClient = new NativeDiscoveryServiceImpl();
+            nativeClient.setDiscoveryServiceEndpoint(serviceConfig.server);
+            nativeClient.setRefreshInterval(serviceConfig.expires);
+            nativeClient.setRequestTimeout(serviceConfig.nativeClientTimeout);
+            nativeClient.updateGameBrowserProperties();
+            result = nativeClient;
+        }
         return result;
     }
 

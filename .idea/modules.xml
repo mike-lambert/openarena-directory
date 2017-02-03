@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/gamebrowser/gamebrowser.iml" filepath="$PROJECT_DIR$/gamebrowser/gamebrowser.iml" />
       <module fileurl="file://$PROJECT_DIR$/openarena-directory.iml" filepath="$PROJECT_DIR$/openarena-directory.iml" />
     </modules>
   </component>

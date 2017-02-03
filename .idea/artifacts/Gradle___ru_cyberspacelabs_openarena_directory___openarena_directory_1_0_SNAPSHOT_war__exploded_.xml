@@ -31,6 +31,10 @@
           <element id="library" level="project" name="Gradle: com.fasterxml.jackson.core:jackson-databind:2.8.5" />
           <element id="library" level="project" name="Gradle: com.squareup.okhttp3:okhttp:3.5.0" />
           <element id="library" level="project" name="Gradle: com.squareup.okio:okio:1.11.0" />
+          <element id="archive" name="ru.cyberspacelabs-gamebrowser-1.0-SNAPSHOT.jar">
+            <element id="module-output" name="gamebrowser" />
+            <element id="dir-copy" path="$PROJECT_DIR$/gamebrowser/build/resources/main" />
+          </element>
         </element>
       </element>
       <element id="directory" name="META-INF">

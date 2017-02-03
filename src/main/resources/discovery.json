@@ -5,7 +5,9 @@
     {
       "server" : "dpmaster.deathmask.net",
       "report" : "dpmaster.deathmask.net.xml",
-      "expires": 60000
+      "expires": 60000,
+      "useNativeClient" : true,
+      "nativeClientTimeout": 1000
     }
   ]
 }
