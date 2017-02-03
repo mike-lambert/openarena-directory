@@ -1,5 +1,6 @@
 # OpenArena Directory Server
-A web service, which intended to wrap and consolidate output from [qstat](https://sourceforge.net/projects/qstat/) utility.
+A web service, which intended to provide web API and web UI for master servers of FPS games such as OpenArena or Quake 3.
+It also can acts as frontend for [qstat](https://sourceforge.net/projects/qstat/) utility.
 ## Build requirements
 JDK 8 itself and no more. Just use gradle wrapper in project.
 
@@ -30,4 +31,4 @@ end
 1. installed wine
 2. qstat.exe at /opt/openarena/qstat directory
 
-When using Windows, or having native binary under Linux/Mac, you must replace this path in relevent sources for passing tests
+When using Windows, or having native binary under Linux/Mac, you must replace this path in relevant sources for passing tests
