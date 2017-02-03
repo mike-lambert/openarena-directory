@@ -47,11 +47,14 @@ public class DirectoryViewController {
         return createDirectoryMV(request, directory);
     }
 
-    private ModelAndView createDirectoryMV(HttpServletRequest request, Directory directory){
+    private ModelAndView createDirectoryMV(HttpServletRequest request, Directory directory) throws Exception {
         ModelAndView result = new ModelAndView("directory");
+        ServerDtoRenderer renderer=  new ServerDtoRenderer();
+        renderer.setRequest(request);
         result.addObject("request", request);
-        result.addObject("renderer", new ServerDtoRenderer());
+        result.addObject("renderer", renderer);
         result.addObject("directory", directory);
+        result.addObject("discovery", directoryService.enumerateDiscoveryServers());
         try {
             result.addObject("location", resolutionService.resolve(request.getRemoteAddr()).getPath());
         } catch (Exception e){

@@ -13,10 +13,11 @@ import java.util.concurrent.atomic.AtomicLong;
  * Created by mzakharov on 01.02.17.
  */
 public class GameBrowser {
-    private static final String DPMASTER = "dpmaster.deathmask.net:27950";
+    public static final String DPMASTER = "dpmaster.deathmask.net:27950";
     private static final String CHALLENGE_CHARSET = "qwertyuiopasdfghjklzxcvbnm1234567890QWERTYUIOPASDFGHJKLZXCVBNM";
     private static final String MARKER_END_SERVERS = "454F54000000"; // EOT\\x00\\x00\\x00
-    private static final String QUERY_OPENARENA_DEFAULT = "getservers 71 empty full demo";
+    public static final String QUERY_OPENARENA_DEFAULT = "getservers 71 empty full demo";
+    public static final String QUERY_XONOTIC_DEFAULT = "getservers Xonotic 3 empty full";
     private static final int PACKET_SIZE = 1400;
 
     private final AtomicLong threadCounter = new AtomicLong(0);
@@ -207,7 +208,9 @@ public class GameBrowser {
             if (strlen > 0){
                 byte[] strbuf = new byte[strlen];
                 System.arraycopy(rd.getData(), index, strbuf, 0, strlen);
-                return new String(strbuf, "ASCII");
+                String result = new String(strbuf, "ASCII");
+                //System.out.println(result);
+                return result;
             }
         }
         return "";
@@ -249,9 +252,22 @@ public class GameBrowser {
                 );*/
                 result.setAddress(entry);
                 result.setDisplayName(properties.get("hostname"));
-                result.setGameType((properties.get("game") == null ? "ffa" : properties.get("game")));
+                String oagt = properties.get("game");
+                String xgt = properties.get("qcstatus");
+                if (xgt != null){
+                    int colon = xgt.indexOf(":");
+                    if (colon != -1 ){
+                        xgt = xgt.substring(0, colon).trim();
+                    }
+                }
+                String gt = xgt != null ? xgt : oagt;
+                result.setGameType((gt == null ? "ffa" : gt));
                 result.setMap(properties.get("mapname"));
-                result.setPlayersPresent(Integer.parseInt(properties.get("g_humanplayers")));
+                try {
+                    result.setPlayersPresent(Integer.parseInt(properties.get("g_humanplayers")));
+                } catch (NumberFormatException nfx1){
+                    result.setPlayersPresent(Integer.parseInt(properties.get("clients")));
+                }
                 result.setRequestDuration(ping);
                 result.setServerProtocol(Integer.parseInt(properties.get("protocol")));
                 result.setSlotsAvailable(Integer.parseInt(properties.get("sv_maxclients")));

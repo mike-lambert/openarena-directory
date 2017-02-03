@@ -16,7 +16,7 @@
  <script src="https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap.min.js"></script>
 
  <!-- self -->
- <link rel="stylesheet" href="../static/style.css"/>
+ <link rel="stylesheet" href="<c:url value="/static/style.css"/>"/>
  <script type="text/javascript" language="javascript">
   $(document).ready(function(){
     $('#servers').DataTable({
@@ -31,26 +31,31 @@
  </script>
  <title>Welcome to OpenArena°</title>
 </head>
-<body style="font-family: 'Jura', sans-serif; font-size: 15px; font-weight: bold; background-color: #000000; color: #FFFFCC; padding-top: 10px;">
+<body>
  <div class="container-fluid" id="page">
   <div class="container-fluid" style="margin: 0 auto;" id="table-container">
-   <div class="container-fluid text-row" id="servers_cache_size" style="min-width: 800px; max-width: 90%;">
-    Серверов: <span id="size">${directory.servers.size()}</span>
+   <div class="container-fluid" id="servers_cache_size" style="min-width: 800px; max-width: 90%;">
+        <span id="size">Серверов: ${directory.servers.size()}&nbsp;&nbsp;*&nbsp;</span>
+        <span id="retrieved">Загружено: ${directory.retrieved}&nbsp;&nbsp;*&nbsp;</span>
+        <span id="updated"> Обновлено: ${directory.updated}&nbsp;&nbsp;*&nbsp;</span>
+       Мастер-сервер:&nbsp;
+       <select id="discovery_servers">
+           <option value="*">[Все]</option>
+           <c:forEach items="${discovery}" var="ds">
+               <option value="${ds}">${ds}</option>
+           </c:forEach>
+       </select>
    </div>
-   <div class="container-fluid text-row" id="servers_cache_status" style="min-width: 800px; max-width: 90%;">
-   Последнее обновление: <span id="updated">${directory.updated}</span>
-   </div>
-   <div class="container-fluid text-row" id="servers_cache_retrieved" style="min-width: 800px; max-width: 90%;">
-    Загружено: <span id="retrieved">${directory.retrieved}</span>
+   <div>
+        &nbsp;&nbsp;
    </div>
    <div id="datatable" style="min-width: 800px; max-width: 100%;">
-    <table id="servers" class="table" style="min-width: 800px; max-width: 100%; font-size: 12px;">
+    <table id="servers" class="table" style="min-width: 800px; max-width: 100%; font-size: 14px;">
      <thead>
-      <th>Название</th>
       <th>Тип</th>
       <th>Пинг</th>
       <th>Нагрузка</th>
-      <th>Местоположение</th>
+      <th>Сервер</th>
       <th>Адрес</th>
       <th>Режим</th>
       <th>Карта</th>
@@ -64,8 +69,5 @@
    </div>
   </div>
  </div>
- <div style="position: absolute; bottom: 0; font-size: 10px; font-family: Coda;">
-  <div style="margin: 0 auto;">IP: ${request.getRemoteAddr()} &nbsp; | &nbsp; ${location}</div>
- </div>
-</body>
+ </body>
 </html>

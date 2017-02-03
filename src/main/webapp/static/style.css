@@ -58,3 +58,18 @@
   .text-row {
     padding: 5px 5px;
   }
+
+  body {
+    font-family: 'Jura', sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    background-color: #000000;
+    color: #FFFFCC;
+    padding-top: 10px;
+  }
+
+  select {
+    background-color: #6e6e6e;
+    margin-top: 10px;
+    padding: 5px 10px;
+  }

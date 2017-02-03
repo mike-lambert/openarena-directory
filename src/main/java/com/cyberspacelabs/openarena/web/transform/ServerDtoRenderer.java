@@ -2,13 +2,17 @@ package com.cyberspacelabs.openarena.web.transform;
 
 import com.cyberspacelabs.openarena.web.dto.Server;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * Created by mike on 10.12.16.
  */
 public class ServerDtoRenderer {
+    private HttpServletRequest request;
+
     public String renderServerType(Server server){
         String title = server.getType().equalsIgnoreCase("OPENARENA") ? "OpenArena" : "Quake 3";
-        String icon = server.getType().equalsIgnoreCase("OPENARENA") ? "../static/icon_openarena.png" : "../static/icon_quake3.png";
+        String icon =  request.getContextPath() + (server.getType().equalsIgnoreCase("OPENARENA") ? "/static/icon_openarena.png" : "/static/icon_quake3.png");
         return  "<img alt=\"" + title + "\" title=\"" + title +"\" src=\""+ icon + "\" width=\"32\"/>" +
                 "<span class=\"text-value\">" + title +"</span>";
     }
@@ -49,15 +53,23 @@ public class ServerDtoRenderer {
     public String render(Server server){
         StringBuilder sb = new StringBuilder();
         sb.append("<tr>").append("\r\n")
-                .append(" <td>").append(server.getName()).append("</td>").append("\r\n")
                 .append(" <td>").append(renderServerType(server)).append("</td>").append("\r\n")
-                .append(" <td>").append(renderServerPing(server)).append("</td>").append("\r\n")
-                .append(" <td>").append(renderServerLoad(server)).append("</td>").append("\r\n")
-                .append(" <td>").append(renderServerLocation(server)).append("</td>").append("\r\n")
+                .append("<td>").append(renderServerPing(server)).append("</td>").append("\r\n")
+                .append("<td>").append(renderServerLoad(server)).append("</td>").append("\r\n")
+                .append(" <td><div>").append(server.getName()).append("</div>").append("\r\n")
+                .append(" <div>").append(renderServerLocation(server)).append("</div></td>").append("\r\n")
                 .append(" <td>").append(server.getAddress()).append("</td>").append("\r\n")
                 .append(" <td>").append(server.getMode()).append("</td>").append("\r\n")
                 .append(" <td>").append(server.getMap()).append("</td>").append("\r\n")
                 .append("</tr>").append("\r\n");
         return sb.toString();
+    }
+
+    public void setRequest(HttpServletRequest request) {
+        this.request = request;
+    }
+
+    public HttpServletRequest getRequest() {
+        return request;
     }
 }

@@ -23,8 +23,6 @@ public class NativeDiscoveryServiceImpl implements QStatDiscoveryService {
     private OpenArenaDiscoveryRecord cache;
     private Object lock;
     private long requestTimeout;
-
-    @Autowired
     private GameBrowser gameBrowser;
 
     public NativeDiscoveryServiceImpl(){
