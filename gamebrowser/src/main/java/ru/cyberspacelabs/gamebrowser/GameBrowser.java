@@ -273,6 +273,7 @@ public class GameBrowser {
             int rnd = r.nextInt();
             if (rnd < 0){ rnd = rnd * -1; }
             char c = CHALLENGE_CHARSET.charAt(rnd % CHALLENGE_CHARSET.length());
+            sb.append(c);
         }
         return sb.toString();
     }
