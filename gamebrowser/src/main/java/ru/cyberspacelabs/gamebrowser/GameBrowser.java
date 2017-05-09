@@ -18,6 +18,7 @@ public class GameBrowser {
     private static final String MARKER_END_SERVERS = "454F54000000"; // EOT\\x00\\x00\\x00
     public static final String QUERY_OPENARENA_DEFAULT = "getservers 71 empty full demo";
     public static final String QUERY_XONOTIC_DEFAULT = "getservers Xonotic 3 empty full";
+    public static final String QUERY_QUAKE_3_ARENA_DEFAULT = "getservers 68 empty full";
     private static final int PACKET_SIZE = 1400;
 
     private final AtomicLong threadCounter = new AtomicLong(0);
