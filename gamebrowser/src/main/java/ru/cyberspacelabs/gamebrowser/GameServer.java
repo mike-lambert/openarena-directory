@@ -12,6 +12,8 @@ public class GameServer {
     private String displayName;
     private String gameType;
     private long requestDuration;
+    private String game;
+    private boolean pinned;
 
     public GameServer(){
         setRequestDuration(-1);
@@ -83,6 +85,22 @@ public class GameServer {
 
     public boolean isValid(){
         return getRequestDuration() >= 0;
+    }
+
+    public String getGame() {
+        return game;
+    }
+
+    public void setGame(String game) {
+        this.game = game;
+    }
+
+    public boolean isPinned() {
+        return pinned;
+    }
+
+    public void setPinned(boolean pinned) {
+        this.pinned = pinned;
     }
 
     @Override

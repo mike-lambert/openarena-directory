@@ -1,5 +1,8 @@
 package ru.cyberspacelabs.gamebrowser;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -13,10 +16,14 @@ import java.util.concurrent.atomic.AtomicLong;
  * Created by mzakharov on 01.02.17.
  */
 public class GameBrowser {
-    private static final String DPMASTER = "dpmaster.deathmask.net:27950";
+    private static Logger logger = LoggerFactory.getLogger(GameBrowser.class);
+
+    public static final String DPMASTER = "dpmaster.deathmask.net:27950";
     private static final String CHALLENGE_CHARSET = "qwertyuiopasdfghjklzxcvbnm1234567890QWERTYUIOPASDFGHJKLZXCVBNM";
     private static final String MARKER_END_SERVERS = "454F54000000"; // EOT\\x00\\x00\\x00
-    private static final String QUERY_OPENARENA_DEFAULT = "getservers 71 empty full demo";
+    public static final String QUERY_OPENARENA_DEFAULT = "getservers 71 empty full demo";
+    public static final String QUERY_XONOTIC_DEFAULT = "getservers Xonotic 3 empty full";
+    public static final String QUERY_QUAKE_3_ARENA_DEFAULT = "getservers 68 empty full";
     private static final int PACKET_SIZE = 1400;
 
     private final AtomicLong threadCounter = new AtomicLong(0);
@@ -34,55 +41,71 @@ public class GameBrowser {
     private String masterQuery;
     private DatagramSocket client;
     private long completionTimeout;
+    private String game;
 
     public GameBrowser(){
         this(DPMASTER, QUERY_OPENARENA_DEFAULT);
+        game = "OpenArena";
     }
 
-    public GameBrowser(String masterAddrees, String masterQuery){
-        setMasterAddress(masterAddrees);
+    public GameBrowser(String masterAddress, String masterQuery){
+        setMasterAddress(masterAddress);
         setMasterQuery(masterQuery);
         completionTimeout = 1000;
+        logger.debug("browser {} for {} instantiated", masterQuery, masterAddress);
     }
 
     public long getCompletionTimeout() {
         return completionTimeout;
     }
 
-    public void setCompletionTimeout(long completionTimeout) {
+    public GameBrowser setCompletionTimeout(long completionTimeout) {
         this.completionTimeout = completionTimeout;
+        return this;
     }
 
     public String getMasterAddress() {
         return masterAddress;
     }
 
-    public void setMasterAddress(String masterAddress) {
+    public GameBrowser setMasterAddress(String masterAddress) {
         this.masterAddress = masterAddress;
+        return this;
     }
 
     public String getMasterQuery() {
         return masterQuery;
     }
 
-    public void setMasterQuery(String masterQuery) {
+    public GameBrowser setMasterQuery(String masterQuery) {
         this.masterQuery = masterQuery;
+        return this;
+    }
+
+    public String getGame() {
+        return game;
+    }
+
+    public GameBrowser setGame(String game) {
+        this.game = game;
+        return this;
     }
 
     public Set<GameServer> refresh() {
         Set<GameServer> result = new HashSet<>();
         try {
-            //System.out.println(new Date() + " Contacting master");
+            logger.trace("{} : acquiring UDP socket", masterAddress);
             provideSocket();
-            //System.out.println(new Date() + " Querying master");
+            logger.trace("{} : querying master", masterAddress);
             sendClientCommand(getMasterQuery());
-            //System.out.println(new Date() + " Awaiting master response");
+            logger.trace("{} : awaiting gameserver addresses", masterAddress);
             List<String> servers = awaitServersList();
-            System.out.println(new Date() + " Got " + servers.size() + " address(es) from master");
-            servers.parallelStream().forEach(entry -> {
+            logger.debug("{} : Got {} addresses", masterAddress, servers.size());
+            for(String entry : servers){
+                logger.trace("{} : querying gameserver {} in background", masterAddress, entry);
                 completionService.submit(getServerInfoTask(entry));
+            }
 
-            });
             int tasks = servers.size();
             do{
                 try {
@@ -92,6 +115,7 @@ public class GameBrowser {
                             tasks--;
                             GameServer server = completed.get();
                             if (server != null) {
+                                logger.debug("{} : {} responded in {} ms: '{}'", masterAddress, server.getAddress(), server.getRequestDuration(), server.getDisplayName());
                                 result.add(server);
                             }
                         } else {
@@ -105,12 +129,6 @@ public class GameBrowser {
                     break;
                 }
             }while(true);
-        } catch (SocketException e) {
-            e.printStackTrace();
-            client = null;
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
-            client = null;
         } catch (IOException e) {
             e.printStackTrace();
             client = null;
@@ -198,7 +216,7 @@ public class GameBrowser {
         DatagramPacket rd = new DatagramPacket(buffer, buffer.length);
         socket.receive(rd);
         if (rd.getData() != null && rd.getData().length > 0){
-            //System.out.println(new Date() + " RCV: " + hex(rd.getData()));
+            logger.trace("{} : {}", masterAddress, hex(rd.getData()));
             // \xFF\xFF\xFF\xFFinfoResponse\x0A = 18;
             // each entry starts with \ then 6 bytes (IPv4 + port)
             int index = 18;
@@ -207,28 +225,29 @@ public class GameBrowser {
             if (strlen > 0){
                 byte[] strbuf = new byte[strlen];
                 System.arraycopy(rd.getData(), index, strbuf, 0, strlen);
-                return new String(strbuf, "ASCII");
+                String result = new String(strbuf, "ASCII");
+                //System.out.println(result);
+                return result;
             }
         }
         return "";
     }
 
-    private Callable<GameServer> getServerInfoTask(String entry) {
+    private Callable<GameServer> getServerInfoTask(final String entry) {
         return () -> {
             GameServer result = new GameServer();
             try {
                 long started = System.currentTimeMillis();
-                //System.out.println(new Date() + " Contacting zone " + entry);
                 String[] addrcomponents = entry.split(":");
                 int port = Integer.parseInt(addrcomponents[1]);
                 DatagramSocket socket = new DatagramSocket();
                 socket.connect(InetAddress.getByName(addrcomponents[0]), port);
                 String cmd = "getinfo " + createChallenge();
-                //System.out.println(new Date() + " Querying zone: " + entry + ": \"" + cmd + "\"");
+                logger.trace("{} : sending '{}' to {}", masterAddress, cmd, entry);
                 sendMasterCommand(cmd, socket);
                 String resp = awaitInfoResponse(socket);
                 long completed = System.currentTimeMillis();
-                //System.out.println(new Date() + " Zone answer  : " + entry + ": \"" + resp + "\"");
+                logger.trace("{} : received from {} : \"{}\"", masterAddress, entry, resp);
                 String[] tokens = resp.split("\\\\");
                 Map<String, String> properties = new HashMap<String, String>();
                 int i = 0;
@@ -238,20 +257,26 @@ public class GameBrowser {
                 } while(i < tokens.length);
                 long ping = completed - started;
                 properties.put("ping", new Long(ping).toString());
-                /*System.out.println(new Date() + " " + entry + ": " +
-                        properties.get("hostname") + " : " +
-                        properties.get("mapname") + " " +
-                        properties.get("g_humanplayers") + "/" +
-                        properties.get("sv_maxclients") + " " +
-                        (properties.get("game") == null ? "FFA" : properties.get("game")) + " " +
-                        properties.get("protocol") + " " +
-                        properties.get("ping")
-                );*/
+
+                result.setGame(game);
                 result.setAddress(entry);
                 result.setDisplayName(properties.get("hostname"));
-                result.setGameType((properties.get("game") == null ? "ffa" : properties.get("game")));
+                String oagt = properties.get("game");
+                String xgt = properties.get("qcstatus");
+                if (xgt != null){
+                    int colon = xgt.indexOf(":");
+                    if (colon != -1 ){
+                        xgt = xgt.substring(0, colon).trim();
+                    }
+                }
+                String gt = xgt != null ? xgt : oagt;
+                result.setGameType((gt == null ? "ffa" : gt));
                 result.setMap(properties.get("mapname"));
-                result.setPlayersPresent(Integer.parseInt(properties.get("g_humanplayers")));
+                try {
+                    result.setPlayersPresent(Integer.parseInt(properties.get("g_humanplayers")));
+                } catch (NumberFormatException nfx1){
+                    result.setPlayersPresent(Integer.parseInt(properties.get("clients")));
+                }
                 result.setRequestDuration(ping);
                 result.setServerProtocol(Integer.parseInt(properties.get("protocol")));
                 result.setSlotsAvailable(Integer.parseInt(properties.get("sv_maxclients")));
@@ -259,7 +284,7 @@ public class GameBrowser {
                 StringWriter sw = new StringWriter();
                 PrintWriter pw = new PrintWriter(sw);
                 e.printStackTrace(pw);
-                //System.out.println(new Date() + " <- " + Thread.currentThread().getName() +  ": Zone fault  : " + entry + "\r\n" + sw.toString());
+                logger.warn("{}: failed to get response from {}", masterAddress, entry, e);
                 result = null;
             }
             return result;
