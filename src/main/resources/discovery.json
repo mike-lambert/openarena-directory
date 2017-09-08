@@ -1,13 +1,20 @@
 {
-  "wine" : true,
-  "qstat" : "/opt/openarena/qstat/qstat.exe",
-  "services": [
+  "baseURL" : "http://localhost",
+  "definitions": [
     {
-      "server" : "dpmaster.deathmask.net",
-      "report" : "dpmaster.deathmask.net.xml",
-      "expires": 60000,
-      "useNativeClient" : true,
-      "nativeClientTimeout": 1000
+      "id": "11111",
+      "label": "OpenArena",
+      "master" : "dpmaster.deathmask.net:27950",
+      "query" : "getservers 71 empty full demo",
+      "params": {
+        "maxPing" : 150,
+        "game": "OpenArena",
+        "sort": "ping|capacity",
+        "limit": 10,
+        "pinnedServers": [
+
+        ]
+      }
     }
   ]
 }

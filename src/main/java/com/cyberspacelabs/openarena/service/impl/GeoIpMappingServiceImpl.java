@@ -1,17 +1,15 @@
 package com.cyberspacelabs.openarena.service.impl;
 
-import com.cyberspacelabs.openarena.model.OpenArenaServerRecord;
 import com.cyberspacelabs.openarena.model.geoip.Path;
 import com.cyberspacelabs.openarena.model.geoip.ProximityLevel;
 import com.cyberspacelabs.openarena.service.GeoIpMappingService;
 import com.cyberspacelabs.openarena.service.GeoIpResolutionService;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import ru.cyberspacelabs.gamebrowser.GameServer;
 
 import javax.annotation.PostConstruct;
 import java.io.File;
@@ -28,8 +26,8 @@ public class GeoIpMappingServiceImpl implements GeoIpMappingService {
     private final static String DIRECTORY_FILE = "_.json";
     @Value("${geoip.mapping.cache.path:./.geoip/mapping}")
     private String cachePath;
-    private Map<String, Path<Set<OpenArenaServerRecord>>> reverseCache;
-    private Set<Path<Set<OpenArenaServerRecord>>> cache;
+    private Map<String, Path<Set<GameServer>>> reverseCache;
+    private Set<Path<Set<GameServer>>> cache;
     @Autowired
     private GeoIpResolutionService resolutionService;
     private ExecutorService cacheSaver;
@@ -61,8 +59,8 @@ public class GeoIpMappingServiceImpl implements GeoIpMappingService {
     }
 
     @Override
-    public Set<OpenArenaServerRecord> nearby(String ip, ProximityLevel proximityLevel) throws Exception {
-        Set<OpenArenaServerRecord> result = new CopyOnWriteArraySet<>();
+    public Set<GameServer> nearby(String ip, ProximityLevel proximityLevel) throws Exception {
+        Set<GameServer> result = new CopyOnWriteArraySet<>();
         cache.parallelStream().forEach(path -> {
             if (proximityLevel == null || proximityLevel == ProximityLevel.GLOBAL){
                 result.addAll(path.getValue());
@@ -109,11 +107,11 @@ public class GeoIpMappingServiceImpl implements GeoIpMappingService {
     }
 
     @Override
-    public Path<OpenArenaServerRecord> locate(OpenArenaServerRecord server) throws Exception {
+    public Path<GameServer> locate(GameServer server) throws Exception {
         String ip = getHostAddress(server);
         Path<String> address = resolutionService.resolve(ip);
         String marker = address.getCity() + "/" +address.getZipCode();
-        Path<Set<OpenArenaServerRecord>> geo;
+        Path<Set<GameServer>> geo;
         try {
             geo = cache.stream().filter(path -> path.isSameLocation(address)).findFirst().get();
         } catch (NoSuchElementException nsex){
@@ -131,7 +129,7 @@ public class GeoIpMappingServiceImpl implements GeoIpMappingService {
         geo.getValue(Set.class).add(server);
         reverseCache.put(ip, geo);
         saveCache();
-        return new Path<OpenArenaServerRecord>(marker,
+        return new Path<GameServer>(marker,
                 address.getCountry(),
                 address.getRegion(),
                 address.getCity(),
@@ -140,10 +138,10 @@ public class GeoIpMappingServiceImpl implements GeoIpMappingService {
     }
 
     @Override
-    public void register(Path<OpenArenaServerRecord> entry) {
-        OpenArenaServerRecord record = entry.getValue();
+    public void register(Path<GameServer> entry) {
+        GameServer record = entry.getValue();
         String ip = getHostAddress(record);
-        Path<Set<OpenArenaServerRecord>> geo = null;
+        Path<Set<GameServer>> geo = null;
         try {
             Path address = resolutionService.resolve(ip);
             try {
@@ -169,7 +167,7 @@ public class GeoIpMappingServiceImpl implements GeoIpMappingService {
         }
     }
 
-    private Path createEmptyPath(Path<Set<OpenArenaServerRecord>> original){
+    private Path createEmptyPath(Path<Set<GameServer>> original){
         Path result = new Path(original.getName(), original.getCountry(), original.getRegion(), original.getCity(), original.getZipCode(), original.getLabel(), new CopyOnWriteArraySet<>());
         result.setCountryCode(original.getCountryCode());
         return result;
@@ -191,7 +189,7 @@ public class GeoIpMappingServiceImpl implements GeoIpMappingService {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                Set<OpenArenaServerRecord> records = path.getValue();
+                Set<GameServer> records = path.getValue();
                 records.parallelStream().forEach(record -> {
                     String normName = record.getAddress().replace(":", "-");
                     File jsonFile = new File(target, normName);
@@ -210,7 +208,7 @@ public class GeoIpMappingServiceImpl implements GeoIpMappingService {
         new File(cachePath).mkdirs();
     }
 
-    private String getHostAddress(OpenArenaServerRecord record) {
+    private String getHostAddress(GameServer record) {
         String endpoint = record.getAddress();
         int port = endpoint.indexOf(":");
         if (port == -1) {
@@ -233,11 +231,11 @@ public class GeoIpMappingServiceImpl implements GeoIpMappingService {
                         File directory = new File(region, DIRECTORY_FILE);
                         if (directory.exists() && directory.isFile()){
                             try {
-                                Path<Set<OpenArenaServerRecord>> path = mapper.readValue(directory, Path.class);
+                                Path<Set<GameServer>> path = mapper.readValue(directory, Path.class);
                                 cache.add(path);
                                 for(File city : region.listFiles()){
                                     if (city.isFile() && !city.getName().equals(DIRECTORY_FILE)){
-                                        OpenArenaServerRecord record = mapper.readValue(city, OpenArenaServerRecord.class);
+                                        GameServer record = mapper.readValue(city, GameServer.class);
                                         path.getValue().add(record);
                                         reverseCache.put(getHostAddress(record), path);
                                         System.out.println("  " + city.getAbsolutePath() + " <- " + record);
@@ -255,11 +253,11 @@ public class GeoIpMappingServiceImpl implements GeoIpMappingService {
                                         File zip_directory = new File(zip, DIRECTORY_FILE);
                                         if (zip_directory.exists() && zip_directory.isFile()){
                                             try {
-                                                Path<Set<OpenArenaServerRecord>> path = mapper.readValue(zip_directory, Path.class);
+                                                Path<Set<GameServer>> path = mapper.readValue(zip_directory, Path.class);
                                                 cache.add(path);
                                                 for(File entry : zip.listFiles()){
                                                     if (entry.isFile() && !entry.getName().equals(DIRECTORY_FILE)){
-                                                        OpenArenaServerRecord record = mapper.readValue(entry, OpenArenaServerRecord.class);
+                                                        GameServer record = mapper.readValue(entry, GameServer.class);
                                                         path.getValue().add(record);
                                                         reverseCache.put(getHostAddress(record), path);
                                                         System.out.println("  " + entry.getAbsolutePath() + " <- " + record);

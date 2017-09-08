@@ -1,24 +1,26 @@
 package com.cyberspacelabs.openarena.web.controller;
 
-import com.cyberspacelabs.openarena.model.OpenArenaServerRecord;
+
+import com.cyberspacelabs.openarena.dto.Server;
 import com.cyberspacelabs.openarena.model.geoip.Path;
 import com.cyberspacelabs.openarena.model.geoip.ProximityLevel;
+import com.cyberspacelabs.openarena.service.DefinitionsService;
+import com.cyberspacelabs.openarena.service.DirectoryService;
 import com.cyberspacelabs.openarena.service.GeoIpMappingService;
 import com.cyberspacelabs.openarena.service.GeoIpResolutionService;
-import com.cyberspacelabs.openarena.service.OpenArenaDirectoryService;
-import com.cyberspacelabs.openarena.web.dto.DirectoryDTO;
-import com.cyberspacelabs.openarena.web.transform.DiscoveryRecordToDirectoryDTO;
-import com.cyberspacelabs.openarena.web.transform.ServerDtoRenderer;
-import com.cyberspacelabs.openarena.web.transform.ServerLocationDecorator;
-import com.cyberspacelabs.openarena.web.transform.ServerRecordSetToDirectoryDTO;
+import com.cyberspacelabs.openarena.transform.GameServerTransformer;
+import com.cyberspacelabs.openarena.transform.ServerLocationDecorator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import ru.cyberspacelabs.gamebrowser.GameServer;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by mike on 10.12.16.
@@ -27,7 +29,7 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/directory")
 public class DirectoryViewController {
     @Autowired
-    private OpenArenaDirectoryService directoryService;
+    private DefinitionsService discoveryService;
 
     @Autowired
     private GeoIpResolutionService resolutionService;
@@ -35,25 +37,24 @@ public class DirectoryViewController {
     @Autowired
     private GeoIpMappingService mappingService;
 
+    @Autowired
+    private GameServerTransformer transformer;
+
+    @Autowired
+    private ServerLocationDecorator decorator;
+
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView index(HttpServletRequest request) throws Exception{
-        DirectoryDTO directory = new DiscoveryRecordToDirectoryDTO().apply(directoryService.enumerate());
-        new ServerLocationDecorator().decorate(directory, resolutionService);
+        List<GameServer> retrieved = discoveryService.getDefaultDirectoryService().queryMaster();
+        List<Server> servers = new ArrayList<>();
+        retrieved.forEach(server -> {
+            Server s = transformer.apply(server);
+            decorator.apply(resolutionService, s);
+            servers.add(s);
+        });
         ModelAndView result = new ModelAndView("directory");
         result.addObject("request", request);
-        result.addObject("renderer", new ServerDtoRenderer());
-        result.addObject("directory", directory);
-        return result;
-    }
-
-    @RequestMapping("/nearby/{level}")
-    public ModelAndView nearby(HttpServletRequest request, @PathVariable("level")ProximityLevel level) throws Exception {
-        DirectoryDTO directory = new ServerRecordSetToDirectoryDTO().apply(mappingService.nearby(request.getRemoteAddr(), level));
-        new ServerLocationDecorator().decorate(directory, resolutionService);
-        ModelAndView result = new ModelAndView("directory");
-        result.addObject("request", request);
-        result.addObject("renderer", new ServerDtoRenderer());
-        result.addObject("directory", directory);
+        result.addObject("servers", servers);
         return result;
     }
 

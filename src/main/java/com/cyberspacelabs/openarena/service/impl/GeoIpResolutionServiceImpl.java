@@ -29,7 +29,7 @@ import java.util.concurrent.atomic.AtomicLong;
 })
 @Service
 public class GeoIpResolutionServiceImpl implements GeoIpResolutionService, CountryFlagPictureService {
-    @Value("${countries.flags.directory:./.geoip/flags}")
+    @Value("${geoip.flags.directory:./.geoip/flags}")
     private String flagCachePath;
 
     @Value("${geoip.resolving.cache.path:./.geoip/v4}")

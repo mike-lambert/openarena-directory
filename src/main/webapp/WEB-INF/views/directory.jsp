@@ -34,30 +34,30 @@
 <body style="font-family: 'Jura', sans-serif; font-size: 15px; font-weight: bold; background-color: #000000; color: #FFFFCC; padding-top: 10px;">
  <div class="container-fluid" id="page">
   <div class="container-fluid" style="margin: 0 auto;" id="table-container">
-   <div class="container-fluid text-row" id="servers_cache_size" style="min-width: 800px; max-width: 90%;">
-    Серверов: <span id="size">${directory.servers.size()}</span>
-   </div>
-   <div class="container-fluid text-row" id="servers_cache_status" style="min-width: 800px; max-width: 90%;">
-   Последнее обновление: <span id="updated">${directory.updated}</span>
-   </div>
-   <div class="container-fluid text-row" id="servers_cache_retrieved" style="min-width: 800px; max-width: 90%;">
-    Загружено: <span id="retrieved">${directory.retrieved}</span>
-   </div>
    <div id="datatable" style="min-width: 800px; max-width: 100%;">
     <table id="servers" class="table" style="min-width: 800px; max-width: 100%; font-size: 12px;">
      <thead>
-      <th>Название</th>
       <th>Тип</th>
-      <th>Пинг</th>
+      <th>Сервер</th>
       <th>Нагрузка</th>
-      <th>Местоположение</th>
-      <th>Адрес</th>
       <th>Режим</th>
-      <th>Карта</th>
      </thead>
      <tbody>
-         <c:forEach items="${directory.servers}" var="server">
-          ${renderer.render(server)}
+         <c:forEach items="${servers}" var="server">
+          <td>${server.game}</td>
+          <td>
+            <div>${server.displayName}</div>
+            <div>${server.address}</div>
+            <div>Map: ${server.map}</div>
+            <div>Location: ${server.location}</div>
+            <div>Ping: ${server.requestDuration}</div>
+          </td>
+          <td>
+            ${server.playersPresent}/${server.slotsAvailable}
+          </td>
+          <td>
+            ${server.gameType}
+          </td>
          </c:forEach>
      </tbody>
     </table>
