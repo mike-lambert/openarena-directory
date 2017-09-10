@@ -2,7 +2,7 @@
   "baseURL" : "http://localhost",
   "definitions": [
     {
-      "id": "11111",
+      "id": "6c4ca510-4d56-4f94-b068-fdfa332d80f0",
       "label": "OpenArena",
       "master" : "dpmaster.deathmask.net:27950",
       "query" : "getservers 71 empty full demo",

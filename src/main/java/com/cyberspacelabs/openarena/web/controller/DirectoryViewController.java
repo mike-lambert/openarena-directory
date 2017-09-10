@@ -21,6 +21,7 @@ import ru.cyberspacelabs.gamebrowser.GameServer;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by mike on 10.12.16.
@@ -44,7 +45,7 @@ public class DirectoryViewController {
     private ServerLocationDecorator decorator;
 
     @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView index(HttpServletRequest request) throws Exception{
+    public ModelAndView index() throws Exception{
         List<GameServer> retrieved = discoveryService.getDefaultDirectoryService().queryMaster();
         List<Server> servers = new ArrayList<>();
         retrieved.forEach(server -> {
@@ -53,7 +54,20 @@ public class DirectoryViewController {
             servers.add(s);
         });
         ModelAndView result = new ModelAndView("directory");
-        result.addObject("request", request);
+        result.addObject("servers", servers);
+        return result;
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ModelAndView discover(@PathVariable("id")UUID id) throws Exception{
+        List<GameServer> retrieved = discoveryService.getDirectoryServiceForDefinition(id).queryMaster();
+        List<Server> servers = new ArrayList<>();
+        retrieved.forEach(server -> {
+            Server s = transformer.apply(server);
+            decorator.apply(resolutionService, s);
+            servers.add(s);
+        });
+        ModelAndView result = new ModelAndView("directory");
         result.addObject("servers", servers);
         return result;
     }
