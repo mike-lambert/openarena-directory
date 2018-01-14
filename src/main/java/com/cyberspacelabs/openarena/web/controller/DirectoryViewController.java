@@ -2,10 +2,7 @@ package com.cyberspacelabs.openarena.web.controller;
 
 
 import com.cyberspacelabs.openarena.dto.Server;
-import com.cyberspacelabs.openarena.model.geoip.Path;
-import com.cyberspacelabs.openarena.model.geoip.ProximityLevel;
 import com.cyberspacelabs.openarena.service.DefinitionsService;
-import com.cyberspacelabs.openarena.service.DirectoryService;
 import com.cyberspacelabs.openarena.service.GeoIpMappingService;
 import com.cyberspacelabs.openarena.service.GeoIpResolutionService;
 import com.cyberspacelabs.openarena.transform.GameServerTransformer;
@@ -18,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import ru.cyberspacelabs.gamebrowser.GameServer;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
